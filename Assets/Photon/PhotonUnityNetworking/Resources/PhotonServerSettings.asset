@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
-    AppIdChat: 
-    AppIdVoice: 
-    AppVersion: 
+    AppIdRealtime: f8954dd8-abb8-4141-8492-ee96462c4c84
+    AppIdChat: f8954dd8-abb8-4141-8492-ee96462c4c84
+    AppIdVoice: f8954dd8-abb8-4141-8492-ee96462c4c84
+    AppVersion: 1.0
     UseNameServer: 1
     FixedRegion: 
     Server: 
@@ -47,5 +47,5 @@ MonoBehaviour:
   - SetKinematicFalse
   - SetKinematicTrue
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 0
