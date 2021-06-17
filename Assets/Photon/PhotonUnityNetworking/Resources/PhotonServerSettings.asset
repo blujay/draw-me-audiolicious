@@ -32,7 +32,20 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
-  RpcList: []
+  RpcList:
+  - CantHearYou
+  - ChangeColour
+  - ClickRpc
+  - DestroyRpc
+  - DestroySpaceship
+  - DisableTool
+  - EnableTool
+  - Fire
+  - HeresWhy
+  - RespawnSpaceship
+  - RPC_SetColor
+  - SetKinematicFalse
+  - SetKinematicTrue
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0
