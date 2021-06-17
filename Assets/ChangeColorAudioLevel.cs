@@ -10,7 +10,7 @@ public class ChangeColorAudioLevel : MonoBehaviour
     [SerializeField] Lasp.AudioLevelTracker _input = null;
     public float inputLevel;
     public Transform prefab;
-    public Transform spawnPoint;
+    //public Transform spawnPoint;
     public Color newColor;
     public Material lowMaterial;
     public Material midMaterial;
@@ -33,7 +33,7 @@ public class ChangeColorAudioLevel : MonoBehaviour
         }
         else if (_input.inputLevel >= -30 && _input.inputLevel <= -20)
         {
-            GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+            //GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
             GetComponent<MeshRenderer>().material = midMaterial;
         }
         else GetComponent<MeshRenderer>().material = highMaterial;
