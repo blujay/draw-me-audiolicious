@@ -68,7 +68,9 @@ namespace Networking.Pun2
                 //obj.transform.rotation = transform.localRotation;
                 obj.transform.localScale = thisObjectTransform.transform.localScale;
                 //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
-                obj.gameObject.name = myPrefabName;
+                obj.gameObject.name = gameObject.name;
+                obj.transform.parent = GetComponentInParent<MusicVisualizer>().transform;
+                obj.GetComponent<musicBarScript>().Visualizer = this.GetComponentInParent<MusicVisualizer>();
 
                 // Prevent cloned objects colliding with original.
                 // This assumes that all gameobjects in the clonable's hierarchy are on the default layer
