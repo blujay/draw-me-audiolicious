@@ -20,7 +20,9 @@ namespace Networking.Pun2
         private string myPrefabName;
         private Transform thisObjectTransform;
         [NonSerialized] public OVRGrabber grabber;
-        
+        [NonSerialized] public int band;
+        [NonSerialized] public MusicVisualizer Visualizer;
+
         //public GameObject prefabToClone;
 
         private void Start()
@@ -66,11 +68,13 @@ namespace Networking.Pun2
                 GameObject obj = PhotonNetwork.Instantiate(myPrefabName, this.gameObject.transform.position, this.gameObject.transform.rotation, 0);
                 //obj.transform.position = transform.position;
                 //obj.transform.rotation = transform.localRotation;
-                obj.transform.localScale = thisObjectTransform.transform.localScale;
+                obj.transform.localScale = this.GetComponent<musicBarScript>().transform.localScale;
                 //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
                 obj.gameObject.name = gameObject.name;
                 obj.transform.parent = GetComponentInParent<MusicVisualizer>().transform;
                 obj.GetComponent<musicBarScript>().Visualizer = this.GetComponentInParent<MusicVisualizer>();
+                obj.GetComponent<musicBarScript>().band = this.GetComponent<musicBarScript>().band;
+                obj.GetComponent<musicBarScript>().barColor = this.GetComponent<musicBarScript>().barColor;
 
                 // Prevent cloned objects colliding with original.
                 // This assumes that all gameobjects in the clonable's hierarchy are on the default layer

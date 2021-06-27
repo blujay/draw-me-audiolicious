@@ -2209,7 +2209,7 @@ GameObject:
   - component: {fileID: 3301609145391546087}
   m_Layer: 0
   m_Name: PunHead
-  m_TagString: stickyhead
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2298,14 +2298,14 @@ MonoBehaviour:
   voiceDetection: 1
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (Realtek High Definition Audio)
-  photonMicrophoneDeviceId: 0
+  unityMicrophoneDevice: 
+  photonMicrophoneDeviceId: -1
   interestGroup: 0
-  debugEchoMode: 0
+  debugEchoMode: 1
   reliableMode: 0
   encrypt: 1
   transmitEnabled: 1
-  samplingRate: 48000
+  samplingRate: 24000
   frameDuration: 20000
   bitrate: 30000
   sourceType: 0
