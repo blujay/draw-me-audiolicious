@@ -4,10 +4,6 @@ using Photon.Pun.UtilityScripts;
 using UnityEditor;
 using UnityEngine;
 
-//
-//Creation example tool to instantiate a cube in the network using PhotonNetwork.Instantiate
-//The cube ownership is set to actor number when created, and to its color using SetColor RPC
-//
 namespace Networking.Pun2
 {
 
@@ -68,13 +64,13 @@ namespace Networking.Pun2
                 GameObject obj = PhotonNetwork.Instantiate(myPrefabName, this.gameObject.transform.position, this.gameObject.transform.rotation, 0);
                 //obj.transform.position = transform.position;
                 //obj.transform.rotation = transform.localRotation;
-                obj.transform.localScale = this.GetComponent<musicBarScript>().transform.localScale;
+                //bj.transform.localScale = this.GetComponent<musicBarScript>().transform.localScale;
                 //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
                 obj.gameObject.name = gameObject.name;
-                obj.transform.parent = GetComponentInParent<MusicVisualizer>().transform;
-                obj.GetComponent<musicBarScript>().Visualizer = this.GetComponentInParent<MusicVisualizer>();
-                obj.GetComponent<musicBarScript>().band = this.GetComponent<musicBarScript>().band;
-                obj.GetComponent<musicBarScript>().barColor = this.GetComponent<musicBarScript>().barColor;
+                //obj.transform.parent = GetComponentInParent<MusicVisualizer>().transform;
+                //obj.GetComponent<musicBarScript>().Visualizer = this.GetComponentInParent<MusicVisualizer>();
+                //obj.GetComponent<musicBarScript>().band = this.GetComponent<musicBarScript>().band;
+                //obj.GetComponent<musicBarScript>().barColor = this.GetComponent<musicBarScript>().barColor;
 
                 // Prevent cloned objects colliding with original.
                 // This assumes that all gameobjects in the clonable's hierarchy are on the default layer

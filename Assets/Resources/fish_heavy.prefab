@@ -53,7 +53,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ac158ada841662d46aba93a80188ccd7, type: 2}
+  - {fileID: 2100000, guid: be8ece46ea8d35e4286fac020d2dd0af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217e7aaa86af72943b3f2ffeb132fbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  band: 0
+  barColor: {r: 0, g: 0, b: 0, a: 0}
+  vizMeshRenderer: {fileID: 0}
   minScale: 1
   scaleMultiplier: 3
