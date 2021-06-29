@@ -33,6 +33,23 @@ public class Vizaudioliscious : MonoBehaviour
 
     private Vector3 originPoint;
 
+    public enum vizPresets
+    {
+        iridescentSeaShell,
+        crazyColor,
+        monochrome,
+        playSchool,
+        vividWildClarity,
+        underwaterBlues,
+        afterGlow,
+        smoulderingEmbers,
+        eightiesSkateRink,
+        stainedGlassCaterpillar
+
+    }
+
+    public vizPresets vizPreset;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -210,6 +227,10 @@ private void JiggleJiggle()
         }
     }
 
+    private void OnValidate()
+    {
+        AddColors();
+    }
     private void AddColors()
     {
         int visualIndex = 0;
@@ -235,56 +256,70 @@ private void JiggleJiggle()
             float jiggleHeight = sum * jiggleModAmount; // we're going to use this to affect our values here
                                                         //make into switches - for now disable comments for the ones you want
 
-            /*crazy colour set
-                float red = Mathf.Cos(visualIndex + pitchValue)+ jiggleHeight; 
-                float green = Mathf.Sin(visualIndex * pitchValue) + jiggleHeight; 
-                float blue = Mathf.Cos(visualIndex/dbLoudnessValue + pitchValue);
-            */
-            /*monochrome set
-                float red = spectrum[spectrumIndex] + jiggleHeight;
-                float green = spectrum[spectrumIndex] + jiggleHeight;
-                float blue = spectrum[spectrumIndex] + jiggleHeight;
-            */
-            /*Playschool set
-                float red = spectrum[spectrumIndex] + jiggleHeight + Mathf.Cos(visualIndex);
-                float green = spectrum[spectrumIndex] + jiggleHeight + Mathf.Sin(visualIndex);
-                float blue = spectrum[spectrumIndex] + jiggleHeight + Mathf.Atan(visualIndex);
-            */
-            /*Vivid - wild clarity
-                float red = spectrum[spectrumIndex] + Mathf.Atan(jiggleHeight);
-                float green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
-                float blue = spectrum[spectrumIndex] + Mathf.Tan(jiggleHeight);
-            */
-            /*Underwater blues
-                float red = Mathf.Log(dbLoudnessValue * pitchValue) + Mathf.Log(spectrumIndex);
-                float green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
-                float blue = jiggleHeight * visualIndex - Mathf.Cos(rmsAverageOutputValue);
-            */
-            /*Afterglow
-                float red = spectrum[spectrumIndex] * Mathf.Cos(pitchValue);
-                float green = spectrum[spectrumIndex] * Mathf.Sin(pitchValue);
-                float blue = spectrum[spectrumIndex] * Mathf.Tan(pitchValue);
-            */
-            /*Glowing embers - keep the fire alive
-            float red = spectrum[spectrumIndex] * Mathf.Cos(rmsAverageOutputValue*jiggleHeight)*2;
-            float green = spectrum[spectrumIndex] * Mathf.Sin(rmsAverageOutputValue*jiggleHeight);
-            float blue = spectrum[spectrumIndex] * Mathf.Atan(rmsAverageOutputValue*jiggleHeight);
-            */
-            //Iridescent seashell
-                float red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
-                float green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
-                float blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Atan(visualIndex);
-            
-            /*Neon 80s pink n blue
-                float red = spectrum[spectrumIndex] + pitchValue * Mathf.Cos(visualIndex);
-                float green = spectrum[spectrumIndex] + pitchValue * Mathf.Sin(visualIndex);
-                float blue = spectrum[spectrumIndex] + pitchValue * Mathf.Atan(visualIndex);
-            */
-            /*Stained Glass
-                float red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
-                float green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
-                float blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Tan(visualIndex);
-            */
+            float red, green, blue;
+
+            switch (vizPreset)
+            {
+                case vizPresets.iridescentSeaShell:
+                        red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
+                        green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
+                        blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Atan(visualIndex);
+                        break;
+
+                case vizPresets.crazyColor:
+                        red = Mathf.Cos(visualIndex + pitchValue)+ jiggleHeight; 
+                        green = Mathf.Sin(visualIndex * pitchValue) + jiggleHeight; 
+                        blue = Mathf.Cos(visualIndex/dbLoudnessValue + pitchValue);
+                        break;
+
+                case vizPresets.monochrome:
+                        red = spectrum[spectrumIndex] + jiggleHeight;
+                        green = spectrum[spectrumIndex] + jiggleHeight;
+                        blue = spectrum[spectrumIndex] + jiggleHeight;
+                        break;
+                case vizPresets.playSchool:
+                        red = spectrum[spectrumIndex] + jiggleHeight + Mathf.Cos(visualIndex);
+                        green = spectrum[spectrumIndex] + jiggleHeight + Mathf.Sin(visualIndex);
+                        blue = spectrum[spectrumIndex] + jiggleHeight + Mathf.Atan(visualIndex);
+                        break;
+                case vizPresets.vividWildClarity:
+                        red = spectrum[spectrumIndex] + Mathf.Atan(jiggleHeight);
+                        green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
+                        blue = spectrum[spectrumIndex] + Mathf.Tan(jiggleHeight);
+                        break;
+                case vizPresets.underwaterBlues:
+                        red = Mathf.Log(dbLoudnessValue * pitchValue) + Mathf.Log(spectrumIndex);
+                        green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
+                        blue = jiggleHeight * visualIndex - Mathf.Cos(rmsAverageOutputValue);
+                        break;
+                case vizPresets.afterGlow:
+                        red = spectrum[spectrumIndex] * Mathf.Cos(pitchValue);
+                        green = spectrum[spectrumIndex] * Mathf.Sin(pitchValue);
+                        blue = spectrum[spectrumIndex] * Mathf.Tan(pitchValue);
+                        break;
+                case vizPresets.smoulderingEmbers:
+                        red = spectrum[spectrumIndex] * Mathf.Cos(rmsAverageOutputValue*jiggleHeight)*2;
+                        green = spectrum[spectrumIndex] * Mathf.Sin(rmsAverageOutputValue*jiggleHeight);
+                        blue = spectrum[spectrumIndex] * Mathf.Atan(rmsAverageOutputValue*jiggleHeight);
+                        break;
+                case vizPresets.eightiesSkateRink:
+                        red = spectrum[spectrumIndex] + pitchValue * Mathf.Cos(visualIndex);
+                        green = spectrum[spectrumIndex] + pitchValue * Mathf.Sin(visualIndex);
+                        blue = spectrum[spectrumIndex] + pitchValue * Mathf.Atan(visualIndex);
+                        break;
+                case vizPresets.stainedGlassCaterpillar:
+                        red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
+                        green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
+                        blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Tan(visualIndex);
+                        break;
+                default:
+                        red = spectrum[spectrumIndex];
+                        green = spectrum[spectrumIndex];
+                        blue = spectrum[spectrumIndex];
+                        break;
+
+                
+            }
 
             Color newBarColor = new Color(red, green, blue);
             jigglyScale[visualIndex] -= Time.deltaTime * smoothModAmount; // This reduces the scale (visualIndex) over time..
