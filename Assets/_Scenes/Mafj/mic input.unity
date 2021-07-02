@@ -281,8 +281,9 @@ MonoBehaviour:
   loudness: 0
   sensitivity: 0
   prefab: {fileID: 0}
-  minScale: 0
+  loopDuration: 0
   recording: 0
+  generated: 0
   x: 0
   y: 0
   z: 0
@@ -1293,8 +1294,9 @@ MonoBehaviour:
   loudness: 0
   sensitivity: 500
   prefab: {fileID: 1616967050}
-  minScale: 1
+  loopDuration: 4
   recording: 0
+  generated: 0
   x: 1
   y: 1
   z: 1

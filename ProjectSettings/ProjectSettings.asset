@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: draw-me-audilicious-voice
+  companyName: inkibit
+  productName: draw-me-audilicious-audio
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -128,7 +128,9 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 8103689843254361246, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}
+  - {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -146,7 +148,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.drawmeaudiliciousvoice
+    Android: com.inkibit.drawmeaudiliciousaudio
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -703,7 +705,7 @@ PlayerSettings:
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
-  allowUnsafeCode: 0
+  allowUnsafeCode: 1
   useDeterministicCompilation: 1
   useReferenceAssemblies: 1
   enableRoslynAnalyzers: 1

@@ -13,17 +13,17 @@ public class MakeAudioLoopObject : MonoBehaviour
         public float loudness;
         public float sensitivity;
         private static AudioSource audioS;
-        private AudioClip GenClip;
         public GameObject prefab;
-        public float minScale;
+        public int loopDuration;
+        //public float minScale;
         private string _SelectedDevice;
         private string[] devices;
         static float[] samplesData;
 
         public bool recording;
         public bool generated;
-        private string fileName;
-        private string filePath;
+        private string filename;
+        private string filepath;
         private AudioSource audioSGen;
 
 
@@ -35,7 +35,8 @@ public class MakeAudioLoopObject : MonoBehaviour
             recording = false;
             generated = false;
             sensitivity = 100;
-            minScale = 0.5f;
+            loopDuration = 4;
+            //minScale = 0.5f;
             _SelectedDevice = Microphone.devices[0].ToString();
             audioS = GetComponent<AudioSource>();
         }
@@ -65,24 +66,24 @@ public class MakeAudioLoopObject : MonoBehaviour
         }
 
 
+/*public void recordClip()
+{
+    audioS.clip = Microphone.Start(_SelectedDevice, true, 1, 22050);
+    audioS.loop = true;
 
+    while (!(Microphone.GetPosition(null) > 0)) { }
+    audioS.clip = audioS.clip;
+    audioS.Play();
 
-    /*public void recordClip()
+}
+*/
+
+IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenClip)
     {
-        audioS.clip = Microphone.Start(_SelectedDevice, true, 1, 22050);
-        audioS.loop = true;
+        filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
+        
 
-        while (!(Microphone.GetPosition(null) > 0)) { }
-        audioS.clip = audioS.clip;
-        audioS.Play();
-
-    }
-    */
-
-    IEnumerator GenerateAudiObject(string filePath, AudioClip GenClip)
-    {
-
-        using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.WAV);
+        using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filepath, AudioType.WAV);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.ConnectionError)
@@ -94,6 +95,7 @@ public class MakeAudioLoopObject : MonoBehaviour
             GenClip = DownloadHandlerAudioClip.GetContent(www);
             audioS.clip = GenClip;
             GameObject.Instantiate(prefab);
+            prefab.transform.position = new Vector3(transform.position.x + 1f, transform.position.y + 1f, transform.position.z + 1f);
             audioSGen = prefab.AddComponent<AudioSource>();
             audioSGen.clip = GenClip;
             audioSGen.Play();
@@ -105,46 +107,49 @@ public class MakeAudioLoopObject : MonoBehaviour
         {
             prefab.GetComponent<Renderer>().material.color = Color.blue;
             recording = true;
-            audioS.clip = Microphone.Start(Microphone.devices[0], true, 4, 22050);  // third argument restrict the duration of the audio to 10 seconds 
+            audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 22050);  // third argument restrict the duration of the audio to 10 seconds 
             while (!(Microphone.GetPosition(null) > 0)) {}
-            recording = false;
-            prefab.GetComponent<Renderer>().material.color = Color.white;
             samplesData = new float[audioS.clip.samples * audioS.clip.channels];
             audioS.clip.GetData(samplesData, 0);
         }
 
-        public void StopRecording()
-        {
-        if (!recording) { 
-            
-            fileName = ("AudioClip-" + DateTime.Now.ToString("yyyymmdd--HH-mm-ss"));
-            filePath = Path.Combine(Application.persistentDataPath, fileName + ".wav");
-            Debug.Log(fileName);
+    public void StopRecording()
+    {
+        prefab.GetComponent<Renderer>().material.color = Color.white;
+        Debug.Log(filename);
 
-            // Delete the file if it exists.
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-            try
-            {
-                SavWav.Save(fileName, audioS.clip);
-                Debug.Log("File Saved Successfully at: " + filePath);
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Debug.LogError("Please, Create a StreamingAssets Directory in the Assets Folder");
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.Message);    //check for other Exceptions 
-            }
+        // Delete the file if it exists.
+        if (File.Exists(filepath))
+        {
+            File.Delete(filepath);
+        }
+        try
+        {
             Microphone.End(_SelectedDevice);
-            if (!generated)
+            recording = false;
+            if (!recording && !generated)
             {
-                StartCoroutine(GenerateAudiObject(filePath, audioS.clip));
-                generated = true;
+                filename = ("AudioClip-" + DateTime.Now.ToString("yyyymmdd--HH-mm-ss"));
+                filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
+                SavWav.Save(filename, audioS.clip);
+                Debug.Log("File Saved Successfully at: " + filepath);
             }
+           
+        }
+        catch (DirectoryNotFoundException)
+        {
+            Debug.LogError("this is not the folder you need. It will appear in the application.persistentDatapath folder. ");
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);    //check for other Exceptions 
+        }
+            
+        if (!generated && !recording)
+        {
+            StartCoroutine(GenerateAudiObject(filepath, filename, audioS.clip));
+            generated = true;
+            prefab.GetComponent<Collider>().isTrigger = false;
         }
 
     }
