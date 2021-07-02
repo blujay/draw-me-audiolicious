@@ -2207,6 +2207,7 @@ GameObject:
   - component: {fileID: 378348702750050991}
   - component: {fileID: 5964744147343452718}
   - component: {fileID: 3301609145391546087}
+  - component: {fileID: -5495210239504186020}
   m_Layer: 0
   m_Name: PunHead
   m_TagString: Player
@@ -2288,27 +2289,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6093847017595412510}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   logLevel: 1
-  ignoreGlobalLogLevel: 0
+  ignoreGlobalLogLevel: 1
   voiceDetection: 1
-  voiceDetectionThreshold: 0.01
-  voiceDetectionDelayMs: 500
+  voiceDetectionThreshold: 0.736
+  voiceDetectionDelayMs: 200
   unityMicrophoneDevice: 
-  photonMicrophoneDeviceId: 0
+  photonMicrophoneDeviceId: -1
   interestGroup: 0
   debugEchoMode: 1
   reliableMode: 0
   encrypt: 1
   transmitEnabled: 1
-  samplingRate: 24000
+  samplingRate: 48000
   frameDuration: 20000
   bitrate: 30000
-  sourceType: 0
+  sourceType: 1
   microphoneType: 0
   audioClip: {fileID: 0}
   loopAudioClip: 1
@@ -2324,7 +2325,7 @@ MonoBehaviour:
     AcousticEchoCancellation: 0
     AutomaticGainControl: 0
     NoiseSuppression: 0
-  recordOnlyWhenEnabled: 0
+  recordOnlyWhenEnabled: 1
   skipDeviceChangeChecks: 0
   stopRecordingWhenPaused: 0
   useOnAudioFilterRead: 0
@@ -2338,7 +2339,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6093847017595412510}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -2449,8 +2450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logLevel: 1
-  ignoreGlobalLogLevel: 0
-  playbackOnlyWhenEnabled: 0
+  ignoreGlobalLogLevel: 1
+  playbackOnlyWhenEnabled: 1
   playDelayMs: -1
   playbackDelaySettings:
     MinDelaySoft: 200
@@ -2484,9 +2485,9 @@ MonoBehaviour:
   ignoreGlobalLogLevel: 0
   recorderInUse: {fileID: 7199416143168965872}
   speakerInUse: {fileID: -4147891962909844277}
-  AutoCreateRecorderIfNotFound: 0
-  UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
+  AutoCreateRecorderIfNotFound: 1
+  UsePrimaryRecorder: 1
+  SetupDebugSpeaker: 1
 --- !u!114 &3845324541663604040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,6 +2546,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &-5495210239504186020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093847017595412510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb97efb574f659409728d4cdca19743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 2752241387742662934}
 --- !u!1 &6194897308091228455
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,17 +21,24 @@ public class Vizaudioliscious : MonoBehaviour
     public float maxJigglyScale = 25.0f;
     public float keepPercentage = 0.5f;
     public float circleRadius = 2;
-    public Transform prefabToMakeJiggle;
-    private string prefabName;
+    public GameObject prefabToMakeJiggle;
     public Material jigglyMaterial;
 
-    private AudioSource source;
+    public AudioSource source;
     private float[] samples;
     private float[] spectrum;
     private float sampleRate;
 
 
     private Vector3 originPoint;
+
+    private bool SetupComplete = false;
+
+    public enum audioSources
+    {
+        VizAudio,
+        MicAudio
+    }
 
     public enum vizPresets
     {
@@ -48,21 +55,33 @@ public class Vizaudioliscious : MonoBehaviour
 
     }
 
+    public audioSources vizAudio;
     public vizPresets vizPreset;
 
     // Start is called before the first frame update
+
     private void Start()
     {
-        source = GetComponent<AudioSource>();
         samples = new float[SAMPLE_SIZE];
         spectrum = new float[SAMPLE_SIZE];
         sampleRate = AudioSettings.outputSampleRate;
         originPoint = this.transform.position;
-        prefabName = prefabToMakeJiggle.gameObject.name;
-        
 
-        //MakeJiggliesRow();
-        MakeJigglesCircle();
+        switch (vizAudio)
+        {
+            case audioSources.VizAudio:
+                source = GetComponent<AudioSource>();
+                break;
+            case audioSources.MicAudio:
+                source = GameObject.Find("PlayerHead-" + PhotonNetwork.LocalPlayer.ActorNumber).GetComponent<AudioSource>();
+                break;
+        }
+
+
+                //MakeJiggliesRow();
+                MakeJigglesCircle();
+
+        SetupComplete = true; //so that we don't try to add new colours or materials before setup is finished
     }
 
 
@@ -79,15 +98,16 @@ public class Vizaudioliscious : MonoBehaviour
         for (int i = 0; i < amountOfJigglies; i++)
         {
             GameObject jiggly;
-            if(prefabToMakeJiggle)
+            if (prefabToMakeJiggle)
             {
-                jiggly = PhotonNetwork.Instantiate(prefabName, transform.position, transform.rotation);
+                jiggly = PhotonNetwork.Instantiate(prefabToMakeJiggle.name, transform.position, transform.rotation);
                 jiggly.gameObject.name = prefabToMakeJiggle.name;
-            } else
+            }
+            else
             {
                 jiggly = GameObject.CreatePrimitive(PrimitiveType.Cube) as GameObject;
-            } 
-            
+            }
+
             jigglyList[i] = jiggly.transform; // this sweet little jiggly is now in the list :)
             jigglyList[i].position = Vector3.right * i;
         }
@@ -113,14 +133,14 @@ public class Vizaudioliscious : MonoBehaviour
 
             if (prefabToMakeJiggle)
             {
-                jiggly = PhotonNetwork.Instantiate(prefabName, transform.position, transform.rotation);
+                jiggly = PhotonNetwork.Instantiate(prefabToMakeJiggle.name, transform.position, transform.rotation);
                 jiggly.gameObject.name = prefabToMakeJiggle.name;
             }
             else
             {
                 jiggly = GameObject.CreatePrimitive(PrimitiveType.Cube) as GameObject;
             }
-            
+
             jiggly.GetComponentInChildren<Renderer>().material = jigglyMaterial;
             jiggly.transform.position = jigglyPos;
             jiggly.transform.parent = transform;
@@ -140,7 +160,6 @@ public class Vizaudioliscious : MonoBehaviour
         AnalyzeSound();
         JiggleJiggle();
         AddColors();
-        
     }
 
     private void AnalyzeSound()
@@ -150,7 +169,7 @@ public class Vizaudioliscious : MonoBehaviour
 
         //get RMS 'Average Output' values;
         float sum = 0;
-        for(i = 0; i < SAMPLE_SIZE; i++)
+        for (i = 0; i < SAMPLE_SIZE; i++)
         {
             sum = samples[i] * samples[i];
         }
@@ -158,7 +177,7 @@ public class Vizaudioliscious : MonoBehaviour
 
         //get DB 'Loudness' value
         //Check out this page: https://answers.unity.com/questions/157940/getoutputdata-and-getspectrumdata-they-represent-t.html
-        
+
         dbLoudnessValue = 20 * Mathf.Log10(rmsAverageOutputValue / 0.1f);
 
         //get sound spectrum
@@ -169,8 +188,8 @@ public class Vizaudioliscious : MonoBehaviour
 
         float maxValue = 0;
         var maxNumber = 0;
-        
-        for(i = 0; i < SAMPLE_SIZE; i++)
+
+        for (i = 0; i < SAMPLE_SIZE; i++)
         {
             if (!(spectrum[i] > maxValue) || !(spectrum[i] > 0.0f))
                 continue;
@@ -180,8 +199,8 @@ public class Vizaudioliscious : MonoBehaviour
         }
 
         float frequencyNumber = maxNumber;
-        
-        if(maxNumber > 0 && maxNumber < SAMPLE_SIZE - 1)
+
+        if (maxNumber > 0 && maxNumber < SAMPLE_SIZE - 1)
         {
             var dLeft = spectrum[maxNumber - 1] / spectrum[maxNumber];
             var dRight = spectrum[maxNumber + 1] / spectrum[maxNumber];
@@ -191,9 +210,9 @@ public class Vizaudioliscious : MonoBehaviour
     }
 
 
-//Make those jiggly babies dance in a row!!
+    //Make those jiggly babies dance in a row!!
 
-private void JiggleJiggle()
+    private void JiggleJiggle()
     {
         int visualIndex = 0;
         int spectrumIndex = 0; //place in the spectrum where our single sample lives..ahhh sweet.
@@ -229,7 +248,7 @@ private void JiggleJiggle()
 
     private void OnValidate()
     {
-        AddColors();
+        if (SetupComplete) AddColors(); // now we can add stuff. Setup has finished
     }
     private void AddColors()
     {
@@ -261,70 +280,70 @@ private void JiggleJiggle()
             switch (vizPreset)
             {
                 case vizPresets.iridescentSeaShell:
-                        red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
-                        green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
-                        blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Atan(visualIndex);
-                        break;
+                    red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
+                    green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
+                    blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Atan(visualIndex);
+                    break;
 
                 case vizPresets.crazyColor:
-                        red = Mathf.Cos(visualIndex + pitchValue)+ jiggleHeight; 
-                        green = Mathf.Sin(visualIndex * pitchValue) + jiggleHeight; 
-                        blue = Mathf.Cos(visualIndex/dbLoudnessValue + pitchValue);
-                        break;
+                    red = Mathf.Cos(visualIndex + pitchValue) + jiggleHeight;
+                    green = Mathf.Sin(visualIndex * pitchValue) + jiggleHeight;
+                    blue = Mathf.Cos(visualIndex / dbLoudnessValue + pitchValue);
+                    break;
 
                 case vizPresets.monochrome:
-                        red = spectrum[spectrumIndex] + jiggleHeight;
-                        green = spectrum[spectrumIndex] + jiggleHeight;
-                        blue = spectrum[spectrumIndex] + jiggleHeight;
-                        break;
+                    red = spectrum[spectrumIndex] + jiggleHeight;
+                    green = spectrum[spectrumIndex] + jiggleHeight;
+                    blue = spectrum[spectrumIndex] + jiggleHeight;
+                    break;
                 case vizPresets.playSchool:
-                        red = spectrum[spectrumIndex] + jiggleHeight + Mathf.Cos(visualIndex);
-                        green = spectrum[spectrumIndex] + jiggleHeight + Mathf.Sin(visualIndex);
-                        blue = spectrum[spectrumIndex] + jiggleHeight + Mathf.Atan(visualIndex);
-                        break;
+                    red = spectrum[spectrumIndex] + jiggleHeight + Mathf.Cos(visualIndex);
+                    green = spectrum[spectrumIndex] + jiggleHeight + Mathf.Sin(visualIndex);
+                    blue = spectrum[spectrumIndex] + jiggleHeight + Mathf.Atan(visualIndex);
+                    break;
                 case vizPresets.vividWildClarity:
-                        red = spectrum[spectrumIndex] + Mathf.Atan(jiggleHeight);
-                        green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
-                        blue = spectrum[spectrumIndex] + Mathf.Tan(jiggleHeight);
-                        break;
+                    red = spectrum[spectrumIndex] + Mathf.Atan(jiggleHeight);
+                    green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
+                    blue = spectrum[spectrumIndex] + Mathf.Tan(jiggleHeight);
+                    break;
                 case vizPresets.underwaterBlues:
-                        red = Mathf.Log(dbLoudnessValue * pitchValue) + Mathf.Log(spectrumIndex);
-                        green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
-                        blue = jiggleHeight * visualIndex - Mathf.Cos(rmsAverageOutputValue);
-                        break;
+                    red = Mathf.Log(dbLoudnessValue * pitchValue) + Mathf.Log(spectrumIndex);
+                    green = spectrum[spectrumIndex] + Mathf.Sin(jiggleHeight);
+                    blue = jiggleHeight * visualIndex - Mathf.Cos(rmsAverageOutputValue);
+                    break;
                 case vizPresets.afterGlow:
-                        red = spectrum[spectrumIndex] * Mathf.Cos(pitchValue);
-                        green = spectrum[spectrumIndex] * Mathf.Sin(pitchValue);
-                        blue = spectrum[spectrumIndex] * Mathf.Tan(pitchValue);
-                        break;
+                    red = spectrum[spectrumIndex] * Mathf.Cos(pitchValue);
+                    green = spectrum[spectrumIndex] * Mathf.Sin(pitchValue);
+                    blue = spectrum[spectrumIndex] * Mathf.Tan(pitchValue);
+                    break;
                 case vizPresets.smoulderingEmbers:
-                        red = spectrum[spectrumIndex] * Mathf.Cos(rmsAverageOutputValue*jiggleHeight)*2;
-                        green = spectrum[spectrumIndex] * Mathf.Sin(rmsAverageOutputValue*jiggleHeight);
-                        blue = spectrum[spectrumIndex] * Mathf.Atan(rmsAverageOutputValue*jiggleHeight);
-                        break;
+                    red = spectrum[spectrumIndex] * Mathf.Cos(rmsAverageOutputValue * jiggleHeight) * 2;
+                    green = spectrum[spectrumIndex] * Mathf.Sin(rmsAverageOutputValue * jiggleHeight);
+                    blue = spectrum[spectrumIndex] * Mathf.Atan(rmsAverageOutputValue * jiggleHeight);
+                    break;
                 case vizPresets.eightiesSkateRink:
-                        red = spectrum[spectrumIndex] + pitchValue * Mathf.Cos(visualIndex);
-                        green = spectrum[spectrumIndex] + pitchValue * Mathf.Sin(visualIndex);
-                        blue = spectrum[spectrumIndex] + pitchValue * Mathf.Atan(visualIndex);
-                        break;
+                    red = spectrum[spectrumIndex] + pitchValue * Mathf.Cos(visualIndex);
+                    green = spectrum[spectrumIndex] + pitchValue * Mathf.Sin(visualIndex);
+                    blue = spectrum[spectrumIndex] + pitchValue * Mathf.Atan(visualIndex);
+                    break;
                 case vizPresets.stainedGlassCaterpillar:
-                        red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
-                        green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
-                        blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Tan(visualIndex);
-                        break;
+                    red = spectrum[spectrumIndex] + jiggleHeight * Mathf.Cos(visualIndex);
+                    green = spectrum[spectrumIndex] + jiggleHeight * Mathf.Sin(visualIndex);
+                    blue = spectrum[spectrumIndex] + jiggleHeight * Mathf.Tan(visualIndex);
+                    break;
                 default:
-                        red = spectrum[spectrumIndex];
-                        green = spectrum[spectrumIndex];
-                        blue = spectrum[spectrumIndex];
-                        break;
+                    red = spectrum[spectrumIndex];
+                    green = spectrum[spectrumIndex];
+                    blue = spectrum[spectrumIndex];
+                    break;
 
-                
+
             }
 
             Color newBarColor = new Color(red, green, blue);
             jigglyScale[visualIndex] -= Time.deltaTime * smoothModAmount; // This reduces the scale (visualIndex) over time..
             jigglyList[visualIndex].GetComponentInChildren<Renderer>().material.color = newBarColor;
-            visualIndex ++;
+            visualIndex++;
         }
     }
 }

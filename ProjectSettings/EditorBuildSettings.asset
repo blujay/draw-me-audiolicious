@@ -14,12 +14,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Holoncore/Scenes/Workshop.unity
     guid: aa9bced0c8a92d040bdc2a2e68fb6e1c
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Mafj/mafj-lobby-viz-2.unity
     guid: ce56f700114909f48b9186ac473d011f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Mafj/mafj-fish-viz-2.unity
     guid: 7d2097856d8f9b249bac7d5becd91aa5
+  - enabled: 1
+    path: Assets/_Scenes/Mafj/mic input.unity
+    guid: 510cc2ba0802a434b96d93783ac9abce
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}

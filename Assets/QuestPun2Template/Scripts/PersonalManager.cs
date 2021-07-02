@@ -43,22 +43,30 @@ namespace Networking.Pun2
                 ovrCameraRig.transform.rotation = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].transform.rotation;
             }
         }
-
         private void Start()
         {
+            
             //Instantiate Head
             GameObject obj = (PhotonNetwork.Instantiate(headPrefab.name, OculusPlayer.instance.head.transform.position, OculusPlayer.instance.head.transform.rotation, 0));
             obj.GetComponent<SetColor>().SetColorRPC(PhotonNetwork.LocalPlayer.ActorNumber);
+            obj.transform.name = "PlayerHead-" + PhotonNetwork.LocalPlayer.ActorNumber;
+            ovrCameraRig.transform.name = "Player-" + PhotonNetwork.LocalPlayer.ActorNumber;
+            obj.transform.parent = ovrCameraRig.transform;
+            Debug.Log("this actor is number " + PhotonNetwork.LocalPlayer.ActorNumber);
             
+            
+
             //Instantiate right hand
             obj = (PhotonNetwork.Instantiate(handRPrefab.name, OculusPlayer.instance.rightHand.transform.position, OculusPlayer.instance.rightHand.transform.rotation, 0));
             for (int i = 0; i < obj.transform.childCount; i++)
             {
                 toolsR.Add(obj.transform.GetChild(i).gameObject);
                 obj.transform.GetChild(i).GetComponent<SetColor>().SetColorRPC(PhotonNetwork.LocalPlayer.ActorNumber);
+                
                 if(i > 0)
                     toolsR[i].transform.parent.GetComponent<PhotonView>().RPC("DisableTool", RpcTarget.AllBuffered, 1);
             }
+            obj.transform.parent = ovrCameraRig.transform;
 
             //Instantiate left hand
             obj = (PhotonNetwork.Instantiate(handLPrefab.name, OculusPlayer.instance.leftHand.transform.position, OculusPlayer.instance.leftHand.transform.rotation, 0));
@@ -69,6 +77,9 @@ namespace Networking.Pun2
                 if (i > 0)
                     toolsL[i].transform.parent.GetComponent<PhotonView>().RPC("DisableTool", RpcTarget.AllBuffered, 1);
             }
+            obj.transform.parent = ovrCameraRig.transform;
+
+
         }
 
         //Detects input from Thumbstick to switch "hand tools"
