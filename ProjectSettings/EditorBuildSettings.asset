@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Mafj/mafj-lobby-viz-2.unity
     guid: ce56f700114909f48b9186ac473d011f
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Mafj/mafj-fish-viz-2.unity
     guid: 7d2097856d8f9b249bac7d5becd91aa5
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Mafj/mic input.unity
     guid: 510cc2ba0802a434b96d93783ac9abce
   m_configObjects:
