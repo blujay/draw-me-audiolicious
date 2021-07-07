@@ -28,9 +28,7 @@ public class MakeAudioLoopObject : MonoBehaviour
         private string filepath;
         //private string packageName;
         //public Text pathtext;
-
-
-    public float x, y, z;
+        //public float x, y, z;
 
     // Start is called before the first frame update
     void Start()
@@ -116,7 +114,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
             if (!generated)
             {
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-                GetComponent<Renderer>().material.color = Color.blue;
+                GetComponentInChildren<Renderer>().material.color = Color.blue;
                 recording = true;
                 audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 22050);  // third argument restrict the duration of the audio to 10 seconds 
                 while (!(Microphone.GetPosition(null) > 0)) { }
@@ -130,7 +128,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
     {
         if (recording)
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            GetComponentInChildren<Renderer>().material.color = Color.white;
             Debug.Log(filename);
             AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 
