@@ -27,8 +27,8 @@ public class StickyBit : MonoBehaviour
         {
             transform.SetParent(other.transform);
             gameObject.tag = "stuck";
-            if ((other.GetComponent("ClonePrefab") as ClonePrefab) != null)
-                GetComponent<ClonePrefab>().enabled = false;
+            if ((other.GetComponent("ClonePrefab") as PunClonePrefab) != null)
+                GetComponent<PunClonePrefab>().enabled = false;
         }
             this.enabled = false;
         }

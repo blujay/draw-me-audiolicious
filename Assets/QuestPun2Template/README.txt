@@ -1,5 +1,7 @@
 Hello! Thanks for purchasing.
 
+New: video tutorial on how to setup https://www.youtube.com/watch?v=9jULIXmD8kc
+
 For using this package, you need to:
 
 1. Set project to export for Oculus quest (Here's a good video on how to do it: https://www.youtube.com/watch?v=KLMf4yTCc0w)
@@ -8,7 +10,7 @@ For using this package, you need to:
 4. Import Photon Pun2 free version https://assetstore.unity.com/packages/tools/network/pun-2-free-119922
 5. Import Photon Voice 2 free https://assetstore.unity.com/packages/tools/audio/photon-voice-2-130518
 6. Go to https://www.photonengine.com/ and create an account, and create a new PUN app and you will get an appID. Copy it and paste it in the PhotonServerSettings config file in the project in App id Realtime and App id Voice fields.
-7. Add the 2 scenes to your build settings "Photon2Lobby" and "Photon2Room" in that order.
+7. Add the 2 scenes to your build settings "Photon2Lobby" and "Photon2Room" in that order. If you want to use Hand tracking, instead of the "Photon2Room" add the "Photon2RoomHandTracking" scene in second place.
 8. Enjoy :)
 
 This template is a starting point for your project, it shows basic integration of Photon2 into Oculus integration, it is designed for oculus quest, but it is also compatible with oculus Rift/go.

@@ -13,7 +13,6 @@ namespace Networking.Pun2
     {
         bool triesToConnectToMaster = false;
         bool triesToConnectToRoom = false;
-        public string sceneName = "Holonspace";
 
         private void Update()
         {
@@ -80,7 +79,7 @@ namespace Networking.Pun2
             base.OnJoinedRoom();
             Debug.Log("Master: " + PhotonNetwork.IsMasterClient + " | Players In Room: " + PhotonNetwork.CurrentRoom.PlayerCount + " | RoomName: " + PhotonNetwork.CurrentRoom.Name + " Region: " + PhotonNetwork.CloudRegion);
             
-            SceneManager.LoadScene(sceneName); //go to the room scene
+            SceneManager.LoadScene(1); //go to the room scene
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -88,7 +87,7 @@ namespace Networking.Pun2
             base.OnJoinRandomFailed(returnCode, message);
             //no room available
             //create a room (null as a name means "does not matter")
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 10, CleanupCacheOnLeave = false });
+            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5 });
         }
     }
 }

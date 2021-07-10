@@ -37,8 +37,16 @@ public class MusicVisualizer : MonoBehaviour {
 
         for (int i = 0; i < numberOfBars; i++)
         {
+            GameObject g;
+
+            if (PhotonNetwork.IsConnected)
+            {
+                g = PhotonNetwork.Instantiate(barObject.name, transform.position, transform.rotation);
+            } else
+            {
+                g = Instantiate(barObject, transform.position, transform.rotation);
+            }
             
-            GameObject g = PhotonNetwork.Instantiate(barObject.name, transform.position, transform.rotation);
             g.transform.localPosition = new Vector3(transform.position.x + barSpacing * i, transform.position.y, transform.position.z);
             g.GetComponent<musicBarScript>().band = i;
             g.GetComponent<musicBarScript>().Visualizer = this;

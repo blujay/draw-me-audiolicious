@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &172176750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172176752}
+  - component: {fileID: 172176751}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &172176751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172176750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d46f6e5c504d47498411f3f59f13c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headPrefab: {fileID: 6093847017595412510, guid: 29fcc252b2a3996429269cb9a9644ed3, type: 3}
+  handRPrefab: {fileID: 8385319148354950344, guid: fbf7f0a128c301f47991f84d7c08d93d, type: 3}
+  handLPrefab: {fileID: 3733991500251528974, guid: 7780656bb769fed43831fe9831283d72, type: 3}
+  ovrCameraRig: {fileID: 1916526264}
+  spawnPoints:
+  - {fileID: 1170282937277863298}
+  lobbySceneName: mafj-lobby-viz-2
+--- !u!4 &172176752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172176750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1939502, y: 2.720094, z: -3.3048353}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &223795482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,9 +258,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!54 &237555422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -884,6 +931,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1167364101429491307, guid: ffab80d3e4893b6438d6119e068f9dcb, type: 3}
   m_PrefabInstance: {fileID: 1170282937277863295}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1170282937277863298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1170282939122554857, guid: ffab80d3e4893b6438d6119e068f9dcb, type: 3}
+  m_PrefabInstance: {fileID: 1170282937277863295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1599112476747956736
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -948,9 +1000,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!54 &4702067367373789734
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -996,9 +1045,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!54 &4702067367884777140
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1044,9 +1090,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!54 &4702067367885449174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1122,9 +1165,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!114 &4702067368809700490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,9 +1180,6 @@ MonoBehaviour:
   loopDuration: 0
   recording: 0
   generated: 0
-  x: 0
-  y: 0
-  z: 0
 --- !u!54 &4702067368809700494
 Rigidbody:
   m_ObjectHideFlags: 0

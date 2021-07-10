@@ -149,6 +149,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1319,8 +1320,7 @@ MonoBehaviour:
   m_grabVolumes: []
   m_controller: 1
   m_parentTransform: {fileID: 3733991500251528971}
-  m_player: {fileID: 6102413031067338895, guid: 8d86a7ea4c2a7d44ea056a9d072af7ea,
-    type: 3}
+  m_player: {fileID: 0}
 --- !u!114 &7196919235457621280
 MonoBehaviour:
   m_ObjectHideFlags: 0

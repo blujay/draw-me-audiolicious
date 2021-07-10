@@ -24,9 +24,9 @@ public class Solvent : MonoBehaviour
             other.tag = "Untagged";
             other.transform.parent = null;
             other.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
-            if ((other.GetComponent("ClonePrefab") as ClonePrefab) != null)
+            if ((other.GetComponent("ClonePrefab") as PunClonePrefab) != null)
             {
-                other.GetComponent<ClonePrefab>().enabled = true;
+                other.GetComponent<PunClonePrefab>().enabled = true;
             }
         }
     }

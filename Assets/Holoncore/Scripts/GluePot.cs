@@ -30,9 +30,9 @@ public class GluePot : MonoBehaviour
             }
            
 
-            if ((other.GetComponent("ClonePrefab") as ClonePrefab) != null)
+            if ((other.GetComponent("ClonePrefab") as PunClonePrefab) != null)
             {
-                other.GetComponent<ClonePrefab>().enabled = false;
+                other.GetComponent<PunClonePrefab>().enabled = false;
             }
         }
     }

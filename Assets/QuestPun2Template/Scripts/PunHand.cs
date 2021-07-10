@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-namespace Chatterbug.Networking
+namespace Networking.Pun2
 {
     [RequireComponent(typeof(OVRGrabber))]
     [RequireComponent(typeof(PhotonView))]
