@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/QuestPun2Template/Scenes/Photon2Lobby.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Holoncore/PunOVR-multiplayer/Scenes/Lobby.unity
+    guid: be2d638cee387f945bf1fbafe54e98fe
   - enabled: 1
-    path: Assets/_Scenes/Mafj/mafj-fish-scene.unity
-    guid: b81f11c5844726e4fafa39cf7d6eaffb
+    path: Assets/Holoncore/PunOVR-multiplayer/Scenes/Holonspace.unity
+    guid: 07c44817a9be27445bf26ec3676687ba
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}

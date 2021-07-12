@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a2b1947b89ba44bb3d82a16dcb432a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Fish_Chris
 --- !u!4 &170046297
 Transform:
   m_ObjectHideFlags: 0
@@ -358,6 +357,10 @@ PrefabInstance:
     - target: {fileID: 1170282939122846663, guid: ffab80d3e4893b6438d6119e068f9dcb, type: 3}
       propertyPath: m_Name
       value: OVRPlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 4306179199055488073, guid: ffab80d3e4893b6438d6119e068f9dcb, type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffab80d3e4893b6438d6119e068f9dcb, type: 3}

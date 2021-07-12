@@ -26,9 +26,7 @@ public class MakeAudioLoopObject : MonoBehaviour
         public bool generated;
         private string filename;
         private string filepath;
-        //private string packageName;
-        //public Text pathtext;
-        //public float x, y, z;
+       
 
     // Start is called before the first frame update
     void Start()
@@ -36,39 +34,12 @@ public class MakeAudioLoopObject : MonoBehaviour
         recording = false;
         generated = false;
         
-        //sensitivity = 100;
         loopDuration = 4;
-        //minScale = 0.5f;
         _SelectedDevice = Microphone.devices[0].ToString();
-        //packageName = "com." + Application.companyName + "." + Application.productName;
-        //Debug.Log(packageName);
+        
     }
 
-    // Update is called once per frame
-    void Update()
-        {
-            //loudness = GetAverageVolume() * sensitivity;
-            //loudness += loudness;
-        }
-
-    /*float GetAverageVolume()
-    {
-        float[] data = new float[256];
-        float a = 0;
-        audioSGen.GetOutputData(data, 0);
-        foreach (float s in data)
-        {
-            a += Mathf.Abs(s);
-        }
-        return a / 256;
-    }*/
-
-    //public void JigglePrefab()
-        //{
-            //prefab.transform.localScale += new Vector3(loudness, loudness, loudness);
-        //}
-
-
+    
 IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenClip)
     {
         AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
@@ -78,25 +49,22 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
             
             filepath = Path.Combine("file://" + Application.persistentDataPath, filename + ".wav");
             Debug.Log (filepath);
-            //pathtext.text = (File.Exists(filepath) ? "Android - File exists at" + filepath : "File does not exist at" + filepath);
-                    }
+        }
         else
         {
             filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
-            //pathtext.text = (File.Exists(filepath) ? "PC - File exists at" + filepath : "File does not exist at" + filepath);
+           
         }
        
-
-
         using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filepath, AudioType.WAV);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(www.error);
-            //pathtext.text = www.error;
+            Debug.Log(www.error); //file not found
+           
         }
-        else //we've got it! no errors. The file is found
+        else //file is found
         {
 
             //load the newly generated and saved clip using the www request 
