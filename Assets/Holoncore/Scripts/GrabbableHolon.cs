@@ -9,8 +9,6 @@ public class GrabbableHolon : OVRGrabbable
     public UnityEvent onGrab;
     public UnityEvent onRelease;
 
-    private Transform _parent;
-
     protected override void Start()
     {
         base.Start();
