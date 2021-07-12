@@ -25,8 +25,8 @@ public class MakeAudioLoopObject : MonoBehaviour
         private string[] devices;
         static float[] samplesData;
 
-        public bool recording;
-        public bool generated;
+        [NonSerialized] public bool recording;
+        [NonSerialized] public bool generated;
         private string filename;
         private string filepath;
 
@@ -118,7 +118,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
                 recording = false;
                 if (!recording && !generated)
                 {
-                    filename = ("clip" + DateTime.Now.ToString("yyyymmdd--HH-mm-ss"));
+                    filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
                     SavWav.Save(filename, audioS.clip);
                     Debug.Log("File Saved Successfully at: " + filepath);

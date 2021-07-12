@@ -3,14 +3,6 @@ Photon C# Client Library - Changelog
 Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
 
-Version 4.1.6.1 (09. June 2021 - rev6086)
-    Fixed: TPeer.TotalPacketCount and TotalCommandsInPackets counters. They were increased in two places for the Init message.
-    Fixed: TPeer.TrafficStatsOutgoing.TotalCommandsInPackets counting in SendData, which was adding the remaining count in queues instead of +1.
-    Changed: TPeer.SendOutgoingCommands(), which will now stop sending if more than MTU size of data was sent. 
-    Note: Messages are not fragmented for TCP/WSS, so they can be well over MTU size as such. But SendOutgoingCommands() will now return if there are more messages, so sending can be limited somewhat.
-    Changed: PhotonClientWebSocket will pause the task only for 50ms if nothing was received.
-    Changed: Log level of PhotonClientWebSocket incoming bytes logging. It's now level "ALL".
-
 Version 4.1.6.0 (19. May 2021 - rev6070)
     Changed: PhotonPeer.ClientVersion is now marked as obsolete. The value should be static and so we added PhotonPeer.Version instead as replacement.
     Internal: EnetPeer.Reset() now sets the timeoutInt = 0 and does a sentReliableCommands.Clear() instead of replacing it.

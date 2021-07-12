@@ -35,11 +35,6 @@ namespace Photon.Realtime
     [InitializeOnLoad]
     public static class PhotonEditorUtils
     {
-        /// <summary>Stores a flag which tells Editor scripts if the PhotonEditor.OnProjectChanged got called since initialization.</summary>
-        /// <remarks>If not, the AssetDatabase is likely not usable yet and instances of ScriptableObject can't be loaded.</remarks>
-        public static bool ProjectChangedWasCalled;
-
-
         /// <summary>True if the ChatClient of the Photon Chat API is available. If so, the editor may (e.g.) show additional options in settings.</summary>
         public static bool HasChat;
 

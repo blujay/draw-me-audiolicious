@@ -3,10 +3,6 @@ PUN 2 - Changelog
 Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
 
-v2.32 (09. June 2021)
-Fixed: Editor scripts to not overwrite the PhotonServerSettings when upgrading projects or loading them without a library folder. While the Editor starts up, the settings may be blank but not null. As before, if the asset is not available, it gets created.
-Updated: Library to 4.1.6.1 with several smaller adjustments. More details in changes-library.txt.
-
 v2.31 (19. May 2021)
 Fixed: RpcList updating. Assumptions about editor-callbacks order were incorrect and caused a variable to not be set as needed.
 Changed: The PhotonViewHandler now resets the sceneViewId to 0 for prefabs. This avoids leaking sceneViewIds to the prefabs.

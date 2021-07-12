@@ -73,6 +73,7 @@ namespace Photon.Pun
 
         protected override void Awake()
         {
+
             if (instance == null || ReferenceEquals(this, instance))
             {
                 instance = this;
@@ -86,6 +87,7 @@ namespace Photon.Pun
 
         protected virtual void OnEnable()
         {
+
             if (Instance != this)
             {
                 Debug.LogError("PhotonHandler is a singleton but there are multiple instances. this != Instance.");

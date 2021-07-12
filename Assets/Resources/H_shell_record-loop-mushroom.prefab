@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 6226442099209852767}
   - component: {fileID: 259344342938832054}
   - component: {fileID: 1581178627}
+  - component: {fileID: 1484356277}
+  - component: {fileID: 1851097042890350697}
   m_Layer: 7
   m_Name: H_shell_record-loop-mushroom
   m_TagString: Untagged
@@ -243,9 +245,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f63d735c18a6347b8bbda68844daaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopDuration: 4
-  recording: 0
-  generated: 0
+--- !u!114 &1484356277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201057838573387799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1851097042890350697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201057838573387799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c0a615918f0d64193d44c6df16e038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopDuration: 0
 --- !u!64 &4857433664322070597
 MeshCollider:
   m_ObjectHideFlags: 0

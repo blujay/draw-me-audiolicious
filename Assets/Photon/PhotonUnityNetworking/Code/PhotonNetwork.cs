@@ -64,7 +64,7 @@ namespace Photon.Pun
     public static partial class PhotonNetwork
     {
         /// <summary>Version number of PUN. Used in the AppVersion, which separates your playerbase in matchmaking.</summary>
-        public const string PunVersion = "2.32";
+        public const string PunVersion = "2.31";
 
         /// <summary>Version number of your game. Setting this updates the AppVersion, which separates your playerbase in matchmaking.</summary>
         /// <remarks>
@@ -3073,13 +3073,9 @@ namespace Photon.Pun
         }
 
 
-        public static void LoadOrCreateSettings(bool reload = false)
+        public static void LoadOrCreateSettings()
         {
-            if (reload)
-            {
-                photonServerSettings = null;    // PhotonEditor will use this to load and save the settings delayed
-            }
-            else if (photonServerSettings != null)
+            if (photonServerSettings != null)
             {
                 Debug.LogWarning("photonServerSettings is not null. Will not LoadOrCreateSettings().");
                 return;
@@ -3090,11 +3086,42 @@ namespace Photon.Pun
             photonServerSettings = (ServerSettings)Resources.Load(PhotonNetwork.ServerSettingsFileName, typeof(ServerSettings));
             if (photonServerSettings != null)
             {
+                //Debug.LogWarning("Settings from Resources.");  // DEBUG
                 return;
             }
 
 
-            // create the ScriptableObject if it could not be loaded
+            #if UNITY_EDITOR
+            // let's check if the AssetDatabase finds the file; aimed to avoid multiple files being created, potentially a futile step
+            AssetDatabase.Refresh();
+
+            // another little check: Does AssetDatabase.Refresh() affect loading Resources?!
+            photonServerSettings = (ServerSettings)Resources.Load(PhotonNetwork.ServerSettingsFileName, typeof(ServerSettings));
+            //Debug.LogWarning("Loaded from Resources after AssetDatabase.Refresh(): "+(photonServerSettings != null)); // DEBUG
+
+
+            var foundSettings = AssetDatabase.FindAssets("t:ServerSettings");
+
+            if (foundSettings.Length >= 1)
+            {
+                string settingsAssetPath = AssetDatabase.GUIDToAssetPath(foundSettings[0]);
+                photonServerSettings = AssetDatabase.LoadAssetAtPath<ServerSettings>(settingsAssetPath);
+
+                if (foundSettings.Length > 1)
+                {
+                    Debug.LogWarning("PUN found multiple PhotonServerSettings assets in the project. Only one should be in any of the Resources folder. Loading: " + settingsAssetPath);
+                }
+
+                if (photonServerSettings != null)
+                {
+                    //Debug.LogWarning("Settings from AssetDatabase."); // DEBUG
+                    return;
+                }
+            }
+            #endif
+
+
+            // create it if not loaded
             if (photonServerSettings == null)
             {
                 photonServerSettings = (ServerSettings)ScriptableObject.CreateInstance("ServerSettings");
@@ -3103,20 +3130,16 @@ namespace Photon.Pun
                     Debug.LogError("Failed to create ServerSettings. PUN is unable to run this way. If you deleted it from the project, reload the Editor.");
                     return;
                 }
+                //Debug.LogWarning("Settings created!"); // DEBUG
             }
 
 
             // in the editor, store the settings file as it's not loaded
             #if  UNITY_EDITOR
-            // don't save the settings before OnProjectUpdated got called (this hints at an ongoing import/load)
-            if (!PhotonEditorUtils.ProjectChangedWasCalled)
-            {
-                return; 
-            }
-
             string punResourcesDirectory = PhotonNetwork.FindPunAssetFolder() + "Resources/";
             string serverSettingsAssetPath = punResourcesDirectory + PhotonNetwork.ServerSettingsFileName + ".asset";
             string serverSettingsDirectory = Path.GetDirectoryName(serverSettingsAssetPath);
+
 
             if (!Directory.Exists(serverSettingsDirectory))
             {
@@ -3129,6 +3152,8 @@ namespace Photon.Pun
 
             // if the project does not have PhotonServerSettings yet, enable "Development Build" to use the Dev Region.
             EditorUserBuildSettings.development = true;
+
+            //Debug.Log("Settings stored to DB."); // DEBUG
             #endif
         }
 

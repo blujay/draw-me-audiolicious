@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4201057838573387799, guid: dfdd158d3eab45340b6a5c32404dd4a7, type: 3}
       propertyPath: m_Name
-      value: H_shell_record-loop-mushroom
+      value: H_shell_record-loop-clone-mushroom
       objectReference: {fileID: 0}
     - target: {fileID: 6788990267101279354, guid: dfdd158d3eab45340b6a5c32404dd4a7, type: 3}
       propertyPath: sceneViewId
@@ -764,24 +764,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1484356276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4201057838573387799, guid: dfdd158d3eab45340b6a5c32404dd4a7, type: 3}
-  m_PrefabInstance: {fileID: 345893712}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1484356277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484356276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: 0
 --- !u!1 &1760990323
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4471539855302891491, guid: cb3e20324f69dc1418b9382e8f81970e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6517949715520873358, guid: cb3e20324f69dc1418b9382e8f81970e, type: 3}
       propertyPath: sceneViewId
@@ -999,7 +981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2276737731434255468, guid: 8e8a37c37631afc4dbc9927188a88538, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926954225816068097, guid: 8e8a37c37631afc4dbc9927188a88538, type: 3}
       propertyPath: sceneViewId
