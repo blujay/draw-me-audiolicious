@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2145485988985994932}
   - component: {fileID: 8626453163745856634}
   m_Layer: 10
-  m_Name: H_shell_Copycat(remember to add collider to Grab points
+  m_Name: H_shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 8446cb282e1f9f344b56bd75db83f0be, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 006e09d00dadcfa4b952b334004ee3b4, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
         m_MethodName: set_material
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: bd0bb729cb6159b4ab21c5f62cad24ee, type: 3}
+          m_ObjectArgument: {fileID: 2100000, guid: abeb12f4208949b4b9e4251ed846c6f0, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

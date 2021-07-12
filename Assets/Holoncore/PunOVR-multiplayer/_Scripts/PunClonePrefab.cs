@@ -16,8 +16,8 @@ namespace Networking.Pun2
         private string myPrefabName;
         private Transform thisObjectTransform;
         [NonSerialized] public OVRGrabber grabber;
-        [NonSerialized] public int band;
-        [NonSerialized] public MusicVisualizer Visualizer;
+        //[NonSerialized] public int band;
+        //[NonSerialized] public MusicVisualizer Visualizer;
 
         //public GameObject prefabToClone;
 

@@ -3,87 +3,61 @@ using UnityEditor;
 using UnityEngine;
 using OVR;
 
-    public class CopyCat : MonoBehaviour
+public class CopyCat : MonoBehaviour
     {
-       // [SerializeField] enum Hand { Right, Left };
-       // [SerializeField] Hand hand;
-        private bool pressedLastFrame = false;
-        private bool clonedLastFrame = false;
-        public OVRGrabber grabber;
+        public bool pressedLastFrame = false;
+        public bool clonedLastFrame = false;
+        private GameObject prefabToClone;
 
-        //public GameObject prefabToClone;
+    public void Awake()
+    {
+        pressedLastFrame = false;
+        clonedLastFrame = false;
+    }
+    public void Start()
+    {
+        prefabToClone = this.gameObject;
 
-        private void Start()
-        {
+    }
+    void Update()
 
-        }
-       
+    {
 
-        void Update()
-        {
-            
-            float triggerAmount = 0;
+           float triggerAmount = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
 
-       
-
-        if (grabber.grabbedObject == this.gameObject)
-        {
-            Debug.Log("holding - " + gameObject.name);
-        }
+        if (triggerAmount > 0.70f)
             {
-                
-                triggerAmount = OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger);
+                pressedLastFrame = true;
 
-                if (triggerAmount > 0.75f)
+                if (pressedLastFrame && !clonedLastFrame && GetComponent<GrabbableHolon>().isGrabbed)
                 {
-                    pressedLastFrame = true;
-                    
-                    if (pressedLastFrame && !clonedLastFrame && grabber!=null)
-                    {
-                        //Clone();
-                        //clonedLastFrame = true;
-                    }
+                    clonedLastFrame = true;
+                    Clone();
                 }
-                
-                bool releasedTrigger = triggerAmount < 0.25f && pressedLastFrame;
-                
-                if(releasedTrigger)
-                {
-                    pressedLastFrame = false;
-                    //clonedLastFrame = false;
 
-                }
-                
+            bool releasedTrigger = triggerAmount < 0.30f && pressedLastFrame;
+
+            if (releasedTrigger)
+            {
+                pressedLastFrame = false;
+                clonedLastFrame = false;
             }
-            
-            //void Clone()
-            //{
-               // GameObject obj = PhotonNetwork.Instantiate(myPrefabName, this.gameObject.transform.position, this.gameObject.transform.rotation, 0);
-                //obj.transform.position = transform.position;
-                //obj.transform.rotation = transform.localRotation;
-                //bj.transform.localScale = this.GetComponent<musicBarScript>().transform.localScale;
-                //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
-                //obj.gameObject.name = gameObject.name;
-                //obj.transform.parent = GetComponentInParent<MusicVisualizer>().transform;
-                //obj.GetComponent<musicBarScript>().Visualizer = this.GetComponentInParent<MusicVisualizer>();
-                //obj.GetComponent<musicBarScript>().band = this.GetComponent<musicBarScript>().band;
-                //obj.GetComponent<musicBarScript>().barColor = this.GetComponent<musicBarScript>().barColor;
 
-                // Prevent cloned objects colliding with original.
-                // This assumes that all gameobjects in the clonable's hierarchy are on the default layer
-                // We undo this in Hand.DetachObject()
-                // Hacky! We probably need to keep track of the entire "isTrigger" status for the cloned
-                // objects hierarchy but that seems like a lot of effort.
-                //obj.layer = LayerMask.NameToLayer("Cloning");
-                //foreach (var go in obj.GetComponentsInChildren<Transform>())
-                //{
-                    //go.gameObject.layer = LayerMask.NameToLayer("Cloning");
-                //}
-
-                //clone.transform.name = gameObject.name;
-                //hand.AttachObject(clone, hand.GetBestGrabbingType(GrabTypes.None), Hand.AttachmentFlags.ParentToHand);
-            //}
-               
         }
-
+    }
+    public void Clone()
+    {
+            
+            prefabToClone = gameObject;
+            GameObject obj = Instantiate(prefabToClone, prefabToClone.transform.position, prefabToClone.transform.rotation);
+            obj.transform.localScale = prefabToClone.transform.localScale;
+            obj.GetComponentInChildren<Renderer>().material.color = this.GetComponentInChildren<Renderer>().material.color;
+            obj.gameObject.name = gameObject.name;
+            obj.gameObject.GetComponent<AudioSource>().Play();
+            obj.layer = LayerMask.NameToLayer("Cloning");
+            foreach (var go in obj.GetComponentsInChildren<Transform>())
+            {
+                go.gameObject.layer = LayerMask.NameToLayer("Cloning");
+            }
+        }
     }
