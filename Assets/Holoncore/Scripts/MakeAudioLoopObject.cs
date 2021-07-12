@@ -6,10 +6,13 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using UnityEngine.Networking;
 #if PLATFORM_ANDROID
 using UnityEngine.Android;
 #endif
+
+[RequireComponent(typeof(AudioSource))]
 
 public class MakeAudioLoopObject : MonoBehaviour
     {
@@ -26,7 +29,11 @@ public class MakeAudioLoopObject : MonoBehaviour
         public bool generated;
         private string filename;
         private string filepath;
-       
+
+    private void OnEnable()
+    {
+        generated = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -84,7 +91,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
                 GetComponentInChildren<Renderer>().material.color = Color.blue;
                 recording = true;
-                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 22050);  // third argument restrict the duration of the audio to 10 seconds 
+                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[audioS.clip.samples * audioS.clip.channels];
                 audioS.clip.GetData(samplesData, 0);

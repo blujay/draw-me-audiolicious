@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class GrabbableHolon : OVRGrabbable
 {

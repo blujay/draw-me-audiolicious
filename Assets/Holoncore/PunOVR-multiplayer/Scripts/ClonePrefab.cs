@@ -13,12 +13,11 @@ namespace Networking.Pun2
 
     public class ClonePrefab : MonoBehaviourPun
     {
-       // [SerializeField] enum Hand { Right, Left };
-       // [SerializeField] Hand hand;
+        [SerializeField] enum Hand { Right, Left };
+        [SerializeField] Hand hand;
         private bool pressedLastFrame = false;
         private bool clonedLastFrame = false;
         private string myPrefabName;
-        //private bool isKinematic;
         private Transform thisObjectTransform;
         [NonSerialized] public OVRGrabber grabber;
         
@@ -28,7 +27,6 @@ namespace Networking.Pun2
         {
             thisObjectTransform = gameObject.transform;
             myPrefabName = gameObject.name;
-            //isKinematic = GetComponent<Rigidbody>().isKinematic;
         }
 
         void Update()
@@ -71,13 +69,6 @@ namespace Networking.Pun2
                 obj.transform.localScale = thisObjectTransform.transform.localScale;
                 //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
                 obj.gameObject.name = myPrefabName;
-                /*if (isKinematic)
-                {
-                    obj.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                } else
-                {
-                    obj.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                }*/
 
                 // Prevent cloned objects colliding with original.
                 // This assumes that all gameobjects in the clonable's hierarchy are on the default layer

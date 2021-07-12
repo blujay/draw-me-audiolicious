@@ -143,9 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4471539855302891491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2189f9ce0fa6d348b0d38c3e61e643d, type: 3}
+  m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand: 0
 --- !u!64 &1496795132877106453
 MeshCollider:
   m_ObjectHideFlags: 0

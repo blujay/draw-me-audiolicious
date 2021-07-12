@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 using OVR;
+using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class CopyCat : MonoBehaviour
     {
