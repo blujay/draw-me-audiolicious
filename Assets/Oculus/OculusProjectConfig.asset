@@ -22,4 +22,4 @@ MonoBehaviour:
   skipUnneededShaders: 0
   focusAware: 1
   requiresSystemKeyboard: 0
-  systemSplashScreen: {fileID: 0}
+  systemSplashScreen: {fileID: 2800000, guid: 8fbd927b8f395644c8321a244684af94, type: 3}

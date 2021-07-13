@@ -20,6 +20,7 @@ public class MakeAudioLoopObject : MonoBehaviour
         //public float loudness;
         //public float sensitivity;
         public int loopDuration;
+        public Color recordingColor;
         //public float minScale;
         private string _SelectedDevice;
         private string[] devices;
@@ -89,7 +90,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
             if (!generated)
             {
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-                GetComponentInChildren<Renderer>().material.color = Color.blue;
+                GetComponentInChildren<Renderer>().material.color = recordingColor;
                 recording = true;
                 audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }

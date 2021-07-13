@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4541919797597158332}
   - component: {fileID: 466124456667289432}
   - component: {fileID: 8367033066651207044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: H_shell_throw-cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: 0
 --- !u!114 &8367033066651207044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +158,7 @@ GameObject:
   - component: {fileID: 1494964380189839829}
   - component: {fileID: 8756413722413014876}
   - component: {fileID: 3732729224096687215}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

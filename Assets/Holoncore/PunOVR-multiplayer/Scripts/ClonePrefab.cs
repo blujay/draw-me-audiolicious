@@ -13,17 +13,22 @@ namespace Networking.Pun2
 
     public class ClonePrefab : MonoBehaviourPun
     {
+       // [SerializeField] enum Hand { Right, Left };
+       // [SerializeField] Hand hand;
         private bool pressedLastFrame = false;
         private bool clonedLastFrame = false;
         private string myPrefabName;
+        private Vector3 myScale;
         private Transform thisObjectTransform;
         [NonSerialized] public OVRGrabber grabber;
         
+        //public GameObject prefabToClone;
 
         private void Start()
         {
             thisObjectTransform = gameObject.transform;
             myPrefabName = gameObject.name;
+            myScale = gameObject.transform.localScale;
         }
 
         void Update()
@@ -63,7 +68,7 @@ namespace Networking.Pun2
                 GameObject obj = PhotonNetwork.Instantiate(myPrefabName, this.gameObject.transform.position, this.gameObject.transform.rotation, 0);
                 //obj.transform.position = transform.position;
                 //obj.transform.rotation = transform.localRotation;
-                obj.transform.localScale = thisObjectTransform.transform.localScale;
+                obj.transform.localScale = myScale;
                 //obj.GetComponent<ClonePrefab>().prefabToClone = prefabToClone;
                 obj.gameObject.name = myPrefabName;
 

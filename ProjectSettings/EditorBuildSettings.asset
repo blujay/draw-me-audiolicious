@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Holoncore/PunOVR-multiplayer/Scenes/Holonspace.unity
+    guid: 07c44817a9be27445bf26ec3676687ba
+  - enabled: 0
     path: Assets/Holoncore/PunOVR-multiplayer/Scenes/Lobby.unity
     guid: be2d638cee387f945bf1fbafe54e98fe
   - enabled: 1
-    path: Assets/Holoncore/PunOVR-multiplayer/Scenes/Holonspace.unity
-    guid: 07c44817a9be27445bf26ec3676687ba
+    path: Assets/_Scenes/Mafj/mafj-lobby.unity
+    guid: 7e1f44cc3b4dc0e4fa4f899f5e3c7249
+  - enabled: 1
+    path: Assets/_Scenes/Mafj/mafj-fish-loops-multiplayer.unity
+    guid: 534d11add76c3894b81eab4fc653475e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}

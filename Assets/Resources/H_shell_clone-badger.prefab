@@ -146,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: 0
 --- !u!64 &1496795132877106453
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -227,6 +226,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d6e33b18b7568bd4cac9ec7d4cd50389, type: 3}
       propertyPath: m_Name
       value: badger-head
+      objectReference: {fileID: 0}
+    - target: {fileID: 2818585700363096998, guid: d6e33b18b7568bd4cac9ec7d4cd50389, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832347542676224900, guid: d6e33b18b7568bd4cac9ec7d4cd50389, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e33b18b7568bd4cac9ec7d4cd50389, type: 3}
