@@ -14,7 +14,7 @@ using UnityEngine.Android;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class MakeAudioLoopObject : MonoBehaviour
+public class MakeAudioLoopObject : MonoBehaviourPun
     {
 
         //public float loudness;
@@ -41,8 +41,6 @@ public class MakeAudioLoopObject : MonoBehaviour
     {
         recording = false;
         generated = false;
-        
-        loopDuration = 4;
         _SelectedDevice = Microphone.devices[0].ToString();
         
     }
@@ -92,7 +90,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
                 GetComponentInChildren<Renderer>().material.color = recordingColor;
                 recording = true;
-                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 44100);  // third argument restrict the duration of the audio to duration specified
+                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 22050);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[audioS.clip.samples * audioS.clip.channels];
                 audioS.clip.GetData(samplesData, 0);

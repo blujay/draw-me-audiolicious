@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1437844455521994085
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1666443183065366223, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: loopDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5708408
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5708408
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5708408
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.226
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6959371
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.3573678
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4157081
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.46383893
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 117.987
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -211.772
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951973617146842982, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -132.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809244932895645361, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_Name
+      value: H_mushroom-glow-fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398037395857929491, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c30ea9f470c15946b91ae3159d87009, type: 2}
+    - target: {fileID: 5811712116161112796, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902339055832356038, guid: a9b7330c61718274ca8197081725f550, type: 3}
+      propertyPath: m_Name
+      value: mushroom
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9b7330c61718274ca8197081725f550, type: 3}
