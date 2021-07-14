@@ -92,7 +92,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
                 GetComponentInChildren<Renderer>().material.color = recordingColor;
                 recording = true;
-                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
+                audioS.clip = Microphone.Start(Microphone.devices[0], true, loopDuration, 44100);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[audioS.clip.samples * audioS.clip.channels];
                 audioS.clip.GetData(samplesData, 0);
