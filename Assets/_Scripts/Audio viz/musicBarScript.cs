@@ -9,8 +9,8 @@ public class musicBarScript : MonoBehaviour {
     public Renderer vizMeshRenderer;
     public float minScale;
     public float scaleMultiplier;
-    public int band;
-    public MusicVisualizer Visualizer;
+    [NonSerialized] public int band;
+    [NonSerialized] public MusicVisualizer Visualizer;
 
 	// Use this for initialization
 	void Start () {
