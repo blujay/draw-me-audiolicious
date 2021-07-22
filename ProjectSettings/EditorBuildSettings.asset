@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Holon_Collections/_Audiolicious/_Lichen/lichen-lobby.unity
-    guid: cb1c83c5e0ddefd42a6f034b31616a9d
+    path: Assets/_Holon_Collections/_Audiolicious/_Fish/fish-audio-loop-mouth-lobby.unity
+    guid: bfe582397c0bd6448aea68d36b49f69d
   - enabled: 1
-    path: Assets/_Holon_Collections/_Audiolicious/_Lichen/lichen.unity
-    guid: 3e11f284fc2c391419335451fab19c60
+    path: Assets/_Holon_Collections/_Audiolicious/_Fish/fish-audio-loop-mouth-record.unity
+    guid: 7d2097856d8f9b249bac7d5becd91aa5
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}

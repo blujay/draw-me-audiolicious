@@ -223,34 +223,10 @@ MonoBehaviour:
   - {fileID: 620756624947840955}
   onGrab:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2306899963670852964}
-        m_TargetAssemblyTypeName: MakeAudioLoopObject, Assembly-CSharp
-        m_MethodName: StartRecording
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onRelease:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2306899963670852964}
-        m_TargetAssemblyTypeName: MakeAudioLoopObject, Assembly-CSharp
-        m_MethodName: StopRecording
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   hideHandOnGrab: 0
 --- !u!114 &2306899963670852964
 MonoBehaviour:
@@ -265,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopDuration: 4
-  recordingColor: {r: 0, g: 0, b: 0, a: 0}
+  recordingColor: {r: 0.13755782, g: 0.20463738, b: 0.7924528, a: 0.972549}
 --- !u!114 &-7243916258456067361
 MonoBehaviour:
   m_ObjectHideFlags: 0

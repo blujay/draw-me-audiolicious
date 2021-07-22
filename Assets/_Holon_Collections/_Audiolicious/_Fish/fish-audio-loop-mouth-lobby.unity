@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a2b1947b89ba44bb3d82a16dcb432a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: mafj-fish-viz-2
+  sceneName: fish-audio-loop-mouth-record
 --- !u!4 &170046297
 Transform:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -63, y: -32.1}
+  m_AnchoredPosition: {x: -63, y: -38}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &242476612
@@ -616,12 +616,12 @@ GameObject:
   - component: {fileID: 1165483058}
   - component: {fileID: 1165483057}
   m_Layer: 5
-  m_Name: fusebox
+  m_Name: scene name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1165483056
 RectTransform:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -63, y: 6.6}
+  m_AnchoredPosition: {x: -63, y: -4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165483057
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fusebox Holons
+  m_text: fish-audio-loop-mouth-record
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -688,8 +688,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19.89
+  m_fontSizeBase: 19.89
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 1338329394}
   - component: {fileID: 1338329393}
   m_Layer: 5
-  m_Name: Holonspace
+  m_Name: Audiolicious
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 34.6, y: 72}
+  m_AnchoredPosition: {x: 34.6, y: 94}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1338329393
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: draw me audiolicious
+  m_text: draw-me Audiolicious
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
