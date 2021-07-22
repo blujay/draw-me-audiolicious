@@ -433,7 +433,7 @@ MonoBehaviour:
   ovrCameraRig: {fileID: 2114663930}
   spawnPoints:
   - {fileID: 520951236}
-  lobbySceneName: mafj-fish-viz-lobby
+  lobbySceneName: fish-viz-lobby
 --- !u!4 &1137916134
 Transform:
   m_ObjectHideFlags: 0

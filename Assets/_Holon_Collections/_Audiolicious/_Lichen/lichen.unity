@@ -184,62 +184,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5579be5a2fec524cb7ffeb972990ef7, type: 3}
---- !u!1 &16290494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6729708775343768990, guid: f5579be5a2fec524cb7ffeb972990ef7, type: 3}
-  m_PrefabInstance: {fileID: 16290493}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &16290495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16290494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  playbackOnlyWhenEnabled: 0
-  playDelayMs: -1
-  playbackDelaySettings:
-    MinDelaySoft: 200
-    MaxDelaySoft: 400
-    MaxDelayHard: 1000
---- !u!114 &16290496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16290494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f5dfef25a9425449004fabae9e684e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &16290497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16290494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  recorderInUse: {fileID: 0}
-  speakerInUse: {fileID: 16290495}
-  AutoCreateRecorderIfNotFound: 1
-  UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
 --- !u!1 &171619981
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,68 +381,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4863175108870730477, guid: 98e88591713c82f41906f16221086fe5, type: 3}
-      propertyPath: sceneViewId
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98e88591713c82f41906f16221086fe5, type: 3}
---- !u!1 &228272431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 239291356858452659, guid: 98e88591713c82f41906f16221086fe5, type: 3}
-  m_PrefabInstance: {fileID: 228272430}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &228272432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228272431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f5dfef25a9425449004fabae9e684e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &228272433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228272431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  playbackOnlyWhenEnabled: 0
-  playDelayMs: -1
-  playbackDelaySettings:
-    MinDelaySoft: 200
-    MaxDelaySoft: 400
-    MaxDelayHard: 1000
---- !u!114 &228272434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228272431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  recorderInUse: {fileID: 0}
-  speakerInUse: {fileID: 228272433}
-  AutoCreateRecorderIfNotFound: 1
-  UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
 --- !u!1 &337201339
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,72 +477,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5079525645172271593, guid: 5042461221e3db243a20aaa0e2f683c2, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6729708775343768990, guid: 5042461221e3db243a20aaa0e2f683c2, type: 3}
       propertyPath: m_Name
       value: H_lichen-cup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5042461221e3db243a20aaa0e2f683c2, type: 3}
---- !u!1 &365611843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6729708775343768990, guid: 5042461221e3db243a20aaa0e2f683c2, type: 3}
-  m_PrefabInstance: {fileID: 365611842}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &365611844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365611843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f5dfef25a9425449004fabae9e684e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &365611845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365611843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  playbackOnlyWhenEnabled: 0
-  playDelayMs: -1
-  playbackDelaySettings:
-    MinDelaySoft: 200
-    MaxDelaySoft: 400
-    MaxDelayHard: 1000
---- !u!114 &365611846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365611843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  recorderInUse: {fileID: 0}
-  speakerInUse: {fileID: 365611845}
-  AutoCreateRecorderIfNotFound: 1
-  UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
 --- !u!1 &421525542
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,10 +629,6 @@ PrefabInstance:
     - target: {fileID: 76830708339267991, guid: a9a87a2753455da4897581a9cf1d0d91, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1515830589886699316, guid: a9a87a2753455da4897581a9cf1d0d91, type: 3}
-      propertyPath: sceneViewId
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4035191853981080614, guid: a9a87a2753455da4897581a9cf1d0d91, type: 3}
       propertyPath: m_Name
@@ -1917,68 +1737,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8095030539108453198, guid: f5c3cf17465174541848978a2235e0fe, type: 3}
-      propertyPath: sceneViewId
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5c3cf17465174541848978a2235e0fe, type: 3}
---- !u!1 &1400304996 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2833343952075394293, guid: f5c3cf17465174541848978a2235e0fe, type: 3}
-  m_PrefabInstance: {fileID: 1400304995}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1400304997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400304996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86f5dfef25a9425449004fabae9e684e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1400304998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400304996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7fea91fe63f4e1b884ef1e16a975c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  playbackOnlyWhenEnabled: 0
-  playDelayMs: -1
-  playbackDelaySettings:
-    MinDelaySoft: 200
-    MaxDelaySoft: 400
-    MaxDelayHard: 1000
---- !u!114 &1400304999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400304996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logLevel: 3
-  ignoreGlobalLogLevel: 0
-  recorderInUse: {fileID: 0}
-  speakerInUse: {fileID: 1400304998}
-  AutoCreateRecorderIfNotFound: 1
-  UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
 --- !u!1 &1430613884
 GameObject:
   m_ObjectHideFlags: 0
