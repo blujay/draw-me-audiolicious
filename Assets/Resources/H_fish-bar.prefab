@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1831843922898086642}
   - component: {fileID: 5942934651666076874}
   - component: {fileID: 4393273986950255344}
-  - component: {fileID: 2725805416734515472}
-  m_Layer: 7
+  - component: {fileID: -3228627118465063304}
+  m_Layer: 0
   m_Name: H_fish-bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints:
-  - {fileID: 7088442062985865845}
+  - {fileID: 1897991305463998129}
   onGrab:
     m_PersistentCalls:
       m_Calls: []
@@ -151,7 +151,9 @@ MonoBehaviour:
   vizMeshRenderer: {fileID: 2206940081805557747}
   minScale: 0.7
   scaleMultiplier: 0.05
---- !u!114 &2725805416734515472
+  band: 0
+  Visualizer: {fileID: 0}
+--- !u!114 &-3228627118465063304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,9 +162,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4178424892573992226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fca7f8d8d92cef4c96097a8614f875d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressedLastFrame: 0
+  clonedLastFrame: 0
+  myPrefabName: 
+  band:
+    freqband: 0
+    bandBuffer: 0
+    bufferDecrease: 0
+    audioBand: 0
+    audioBandBuffer: 0
+    freqBandHighest: 0
+    barColor: {r: 0, g: 0, b: 0, a: 0}
+    red: 0
+    green: 0
+    blue: 0
 --- !u!1 &6984263921587215349
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +190,7 @@ GameObject:
   - component: {fileID: 6824279332136406477}
   - component: {fileID: 7555566360554650255}
   - component: {fileID: 2206940081805557747}
-  - component: {fileID: 7088442062985865845}
+  - component: {fileID: 1897991305463998129}
   m_Layer: 0
   m_Name: fish
   m_TagString: Untagged
@@ -189,13 +205,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6984263921587215349}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0, y: -0.007, z: -0.009}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.34750137, z: -0.37177187}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 2726387540531254517}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7555566360554650255
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -203,7 +219,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6984263921587215349}
-  m_Mesh: {fileID: 4300000, guid: 3b59d9eee7315e74b95905f877d77bb1, type: 2}
+  m_Mesh: {fileID: 5582501985334600269, guid: 8d0c644c2ea15bd41b178d8ae967be43, type: 3}
 --- !u!23 &2206940081805557747
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -223,7 +239,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d41a5cc77fd60c94fbd2d34f34751e1f, type: 2}
+  - {fileID: 2100000, guid: 7d4887cc920e4724e916b784f6c84461, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -245,7 +261,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7088442062985865845
+--- !u!64 &1897991305463998129
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,4 +274,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 3b59d9eee7315e74b95905f877d77bb1, type: 2}
+  m_Mesh: {fileID: 5582501985334600269, guid: 8d0c644c2ea15bd41b178d8ae967be43, type: 3}

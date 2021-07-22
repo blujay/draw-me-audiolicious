@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1831843922898086642}
   - component: {fileID: 5942934651666076874}
   - component: {fileID: 4393273986950255344}
-  - component: {fileID: 2725805416734515472}
-  m_Layer: 7
+  - component: {fileID: 2176459759129203744}
+  m_Layer: 0
   m_Name: H_fish-orange
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -151,7 +151,9 @@ MonoBehaviour:
   vizMeshRenderer: {fileID: 5092545373999063869}
   minScale: 0.7
   scaleMultiplier: 0.05
---- !u!114 &2725805416734515472
+  band: 0
+  Visualizer: {fileID: 0}
+--- !u!114 &2176459759129203744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,9 +162,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4178424892573992226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fca7f8d8d92cef4c96097a8614f875d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressedLastFrame: 0
+  clonedLastFrame: 0
+  myPrefabName: 
+  band:
+    freqband: 0
+    bandBuffer: 0
+    bufferDecrease: 0
+    audioBand: 0
+    audioBandBuffer: 0
+    freqBandHighest: 0
+    barColor: {r: 0, g: 0, b: 0, a: 0}
+    red: 0
+    green: 0
+    blue: 0
 --- !u!64 &2076427687956920656
 MeshCollider:
   m_ObjectHideFlags: 0

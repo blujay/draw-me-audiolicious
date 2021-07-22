@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfBars: 8
-  numberOfSamples: 64
-  barObject: {fileID: 0}
-  musicSource: {fileID: 0}
-  barSpacing: 1
+  numberOfSamples: 512
+  barObject: {fileID: 4178424892573992226, guid: c5b38f91ab0f4834aa802ba8d7c0f7a0, type: 3}
+  musicSource: {fileID: 2536868686173538234}
+  barSpacing: 0.4
   fftWindow: 0
   baseBufferDecrease: 4
   bufferMultiplier: 1.1
@@ -65,7 +65,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f018860a7fd07014ca7003ef24fbf07d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
