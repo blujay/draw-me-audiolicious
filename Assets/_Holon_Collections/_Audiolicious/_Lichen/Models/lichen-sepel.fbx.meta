@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9470117a055c2a4fb7ca107d840e72d
+guid: c1cbad833e832564ca73f1f1c82c65b0
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Haeckel_Lichenes_normal
-    second: {fileID: 2100000, guid: 7524a651476e6a442a284f5f9e9f64f2, type: 2}
+    second: {fileID: 2100000, guid: 198b3b90dbaa08e479c4019a6d0d61e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a600ef47a8b244340a8db89c4900d0b4
+guid: 54af9cbd4d52c35458d880890bb0fe87
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,7 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Haeckel_Lichenes_normal
-    second: {fileID: 2100000, guid: 7524a651476e6a442a284f5f9e9f64f2, type: 2}
+    second: {fileID: 2100000, guid: 198b3b90dbaa08e479c4019a6d0d61e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lychen_curly_leaf_inside
+    second: {fileID: 2100000, guid: 49cb478698987234fa473e1d54e6eb48, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

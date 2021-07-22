@@ -84,14 +84,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 02d34c07758607c46b7b9ef1cc778ef5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7524a651476e6a442a284f5f9e9f64f2, type: 2}
+      objectReference: {fileID: 2100000, guid: 198b3b90dbaa08e479c4019a6d0d61e6, type: 2}
     - target: {fileID: -7511558181221131132, guid: 02d34c07758607c46b7b9ef1cc778ef5, type: 3}
       propertyPath: m_SelectedEditorRenderState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 02d34c07758607c46b7b9ef1cc778ef5, type: 3}
       propertyPath: m_Name
-      value: lychen-trumpet-large
+      value: lichen-cladonia-cervicornis-segment
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 02d34c07758607c46b7b9ef1cc778ef5, type: 3}
       propertyPath: m_StaticEditorFlags
