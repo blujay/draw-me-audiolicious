@@ -6,6 +6,9 @@ TagManager:
   tags:
   - stickyhead
   - mouth
+  - PortalCam
+  - mask
+  - hair
   layers:
   - Default
   - TransparentFX

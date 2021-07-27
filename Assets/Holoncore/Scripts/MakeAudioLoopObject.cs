@@ -21,6 +21,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         //public float sensitivity;
         public int loopDuration;
         public Color recordingColor;
+        public Color colorPostLoop;
         //public float minScale;
         private string _SelectedDevice;
         private string[] devices;
@@ -102,7 +103,7 @@ IEnumerator GenerateAudiObject(string filepath, string filename, AudioClip GenCl
     {
         if (recording)
         {
-            GetComponentInChildren<Renderer>().material.color = Color.white;
+            GetComponentInChildren<Renderer>().material.color = colorPostLoop;
             Debug.Log(filename);
             AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 

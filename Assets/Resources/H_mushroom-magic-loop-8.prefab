@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loopDuration: 8
   recordingColor: {r: 1, g: 0.14509805, b: 0.4784314, a: 0}
+  colorPostLoop: {r: 0.9056604, g: 0.7069448, b: 0.123033054, a: 0}
 --- !u!114 &5342974798699784844
 MonoBehaviour:
   m_ObjectHideFlags: 0

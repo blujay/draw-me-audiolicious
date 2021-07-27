@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 0f57ec95-dc7b-4978-b8e8-f057ef125e5f
-    AppIdChat: 0f57ec95-dc7b-4978-b8e8-f057ef125e5f
+    AppIdRealtime: b782d752-ba81-4e04-ab70-730bbb13888a
+    AppIdChat: b782d752-ba81-4e04-ab70-730bbb13888a
     AppIdVoice: 22c00ce7-ffa7-4148-9b6c-d254fca4c73d
     AppVersion: 1.0
     UseNameServer: 1
@@ -46,6 +46,10 @@ MonoBehaviour:
   - RPC_SetColor
   - SetKinematicFalse
   - SetKinematicTrue
+  - SetKinematicTrue
+  - ChangeAfterColour
+  - RPC_SetAfterColor
+  - RPC_AddCharacter
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -10,10 +10,8 @@ using UnityEngine.Android;
 
 
 
-//
-//Creation example tool to instantiate a cube in the network using PhotonNetwork.Instantiate
-//The cube ownership is set to actor number when created, and to its color using SetColor RPC
-//
+// make an audio loop
+
 namespace Networking.Pun2
 
 {
