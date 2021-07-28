@@ -38,8 +38,6 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         generated = false;
     }
 
-    private Recorder punRecorder;
-    private Speaker punSpeaker;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,24 +47,32 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         devices = Microphone.devices;
         if (devices.Length > 0)
         {
-            punRecorder = GetComponent<Recorder>();
-            punSpeaker = GetComponent<Speaker>();
-            punRecorder.Init(FindObjectOfType<VoiceConnection>());
-            _SelectedDevice = punRecorder.UnityMicrophoneDevice = devices[0].ToString();
-            punRecorder.SourceType = Recorder.InputSourceType.Microphone;
+            if (PhotonNetwork.IsConnected)
+            {
+                Recorder punRecorder = GetComponent<Recorder>();
+                Speaker punSpeaker = GetComponent<Speaker>();
+                punRecorder.Init(FindObjectOfType<VoiceConnection>());
+                _SelectedDevice = punRecorder.UnityMicrophoneDevice = devices[0].ToString();
+                punRecorder.SourceType = Recorder.InputSourceType.Microphone;
+            }
             
+            else
+            {
+                _SelectedDevice = devices[0].ToString();
+            }
 
         }
-       
-        
     }
 
-    
-IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenClip, Recorder recorder, Speaker speaker)
+
+    IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenClip)
     {
         AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-        recorder = GetComponent<Recorder>();
-        speaker = GetComponent<Speaker>();
+
+        if (PhotonNetwork.IsConnected) {
+            Recorder recorder = GetComponent<Recorder>();
+            Speaker speaker = GetComponent<Speaker>();
+        }
         
 
         if (Application.platform == RuntimePlatform.Android)
@@ -87,29 +93,38 @@ IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenC
         if (www.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(www.error); //file not found
-           
+
         }
         else //file is found
         {
 
             //load the newly generated and saved clip using the www request 
             audioS = gameObject.GetComponent<AudioSource>();
-            //set the recorder component to play from the new audioclip
-            punRecorder.SourceType = Recorder.InputSourceType.AudioClip;
-            if (punSpeaker.IsPlaying)
-            {
-                Debug.Log("speaker is playing" + punSpeaker.name);
-            }
-
-
             audioS.clip = DownloadHandlerAudioClip.GetContent(www);
             audioS.clip.name = filename;
             audioS.Play();
-            audioS.loop = true;
-            generated = true;
-            recorder.AudioClip = audioS.clip;
+
+            if (PhotonNetwork.IsConnected) {
+                Recorder recorder = GetComponent<Recorder>();
+                Speaker speaker = GetComponent<Speaker>();
+                //set the recorder component to play from the new audioclip
+                recorder.SourceType = Recorder.InputSourceType.AudioClip;
+                recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
+                recorder.AudioClip.name = filename;
+                speaker.StartPlayback();
+            } 
+
+            else
+            {
+                audioS.clip = DownloadHandlerAudioClip.GetContent(www);
+                audioS.clip.name = filename;
+                audioS.Play();
+                audioS.loop = true;
+            }
             
-        }
+            generated = true;
+            
+        } 
     }
 
     public void StartRecording()
@@ -119,7 +134,17 @@ IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenC
                 AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
                 GetComponentInChildren<Renderer>().material.color = recordingColor;
                 recording = true;
-                punRecorder.StartRecording();
+
+            if (PhotonNetwork.IsConnected)
+            {
+                Recorder recorder = this.GetComponent<Recorder>();
+                recorder.StartRecording();
+                recorder.SourceType = Recorder.InputSourceType.AudioClip;
+                recorder.AudioClip = Microphone.Start(_SelectedDevice, true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
+                while (!(Microphone.GetPosition(null) > 0)) { }
+                samplesData = new float[recorder.AudioClip.samples * recorder.AudioClip.channels];
+                recorder.AudioClip.GetData(samplesData, 0);
+            }
                 audioS.clip = Microphone.Start(_SelectedDevice, true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[audioS.clip.samples * audioS.clip.channels];
@@ -144,9 +169,19 @@ IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenC
             }
             try
             {
-                Microphone.End(_SelectedDevice);
-                punRecorder.StopRecording();
+                if (PhotonNetwork.IsConnected)
+                {
+                    Recorder recorder = GetComponent<Recorder>();
+                    recorder.StopRecording();
+                }
+
+                else
+                {
+                    Microphone.End(_SelectedDevice);
+                }
+
                 recording = false;
+
                 if (!recording && !generated)
                 {
                     filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
@@ -167,7 +202,7 @@ IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenC
 
             if (!generated && !recording)
             {
-                StartCoroutine(GenerateAudioObject(filepath, filename, audioS.clip, punRecorder, punSpeaker)); ;
+                StartCoroutine(GenerateAudioObject(filepath, filename, audioS.clip)); ;
                 generated = true;
             }
         }
