@@ -12,20 +12,28 @@ public class Vizaudioliscious : MonoBehaviour
 {
     private const int SAMPLE_SIZE = 1024;
 
-    public float rmsAverageOutputValue;
-    public float dbLoudnessValue;
-    public float pitchValue;
+    private float rmsAverageOutputValue;
+    private float dbLoudnessValue;
+    private float pitchValue;
 
+    [Header("Inputs")]
+    public GameObject prefabToMakeJiggle;
+    public AudioSource source;
+
+    [Header("Modifiers")]
     public float jiggleModAmount = 50.0f;
     public float smoothModAmount = 10.0f;
     public float maxJigglyScale = 25.0f;
     public float keepPercentage = 0.5f;
-    public float circleRadius = 2;
-    public GameObject prefabToMakeJiggle;
-    public Material jigglyMaterial;
 
-    public AudioSource source;
-    private float[] samples;
+    [Header("Presets")]
+    public audioSources vizAudio;
+    public vizPresets vizPreset;
+    public jiggleFormations jiggleFormation;
+
+    private Material jigglyMaterial;
+    
+    public float[] samples;
     private float[] spectrum;
     private float sampleRate;
 
@@ -39,6 +47,19 @@ public class Vizaudioliscious : MonoBehaviour
         VizAudio,
         MicAudio
     }
+   
+
+    public enum jiggleFormations
+    {
+        circle,
+        row
+    }
+
+    [Header("Circle Options")]
+    public float circleRadius = 2;
+
+    [Header("Row Formation Jiggles")]
+    public float gapBetweenBars = 1;
 
     public enum vizPresets
     {
@@ -55,8 +76,7 @@ public class Vizaudioliscious : MonoBehaviour
 
     }
 
-    public audioSources vizAudio;
-    public vizPresets vizPreset;
+    
 
     // Start is called before the first frame update
 
@@ -77,9 +97,16 @@ public class Vizaudioliscious : MonoBehaviour
                 break;
         }
 
-
-                //MakeJiggliesRow();
+        switch (jiggleFormation)
+        {
+            case jiggleFormations.circle:
                 MakeJigglesCircle();
+                break;
+            case jiggleFormations.row:
+                MakeJiggliesRow();
+                break;
+        }
+
 
         SetupComplete = true; //so that we don't try to add new colours or materials before setup is finished
     }
@@ -88,7 +115,7 @@ public class Vizaudioliscious : MonoBehaviour
     //make some sweet lil jigglies - objects that jiggle with the beat
     private Transform[] jigglyList; // a list to hold the jigglies in
     private float[] jigglyScale; // how big will they be - this holds the scale of each jiggly?
-    public int amountOfJigglies = 10; // how many of them?
+    public int amountOfJigglies = 8; // how many of them?
 
     private void MakeJiggliesRow()
     {
@@ -110,6 +137,7 @@ public class Vizaudioliscious : MonoBehaviour
 
             jigglyList[i] = jiggly.transform; // this sweet little jiggly is now in the list :)
             jigglyList[i].position = Vector3.right * i;
+            jiggly.transform.parent = transform;
         }
     }
 

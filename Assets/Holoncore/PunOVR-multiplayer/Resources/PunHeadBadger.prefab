@@ -2530,7 +2530,6 @@ GameObject:
   - component: {fileID: 610202350487652613}
   - component: {fileID: 7944761358586328764}
   - component: {fileID: 2799419479224091779}
-  - component: {fileID: 2214613416331955142}
   - component: {fileID: 6991363078794407082}
   m_Layer: 0
   m_Name: Head
@@ -2634,18 +2633,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6987819376397478118, guid: d6e33b18b7568bd4cac9ec7d4cd50389, type: 3}
---- !u!114 &2214613416331955142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6194897308091228455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf6243a866a7b0488acc9855f980047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6991363078794407082
 MonoBehaviour:
   m_ObjectHideFlags: 0

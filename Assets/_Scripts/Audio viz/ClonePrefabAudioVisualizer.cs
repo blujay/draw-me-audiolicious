@@ -17,7 +17,7 @@ namespace Networking.Pun2
         // [SerializeField] Hand hand;
         public bool pressedLastFrame = false;
         public bool clonedLastFrame = false;
-        public string myPrefabName;
+        private string myPrefabName;
         private Vector3 myScale;
         private Transform thisObjectTransform;
         [NonSerialized] public OVRGrabber grabber;
