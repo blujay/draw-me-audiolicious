@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Multiplayer/multiplayer-mic-speaker-test-lobby.unity
-    guid: 7e1f44cc3b4dc0e4fa4f899f5e3c7249
+    path: Assets/_Scenes/Multiplayer/mushroom-simple-audioloop-holons-multiplayer/mushroom-simple-audioloop-holons-multiplayer-lobby.unity
+    guid: 51e094b84439d93479d576ea7a4d0910
   - enabled: 1
-    path: Assets/_Scenes/Multiplayer/multiplayer-mic-speaker-test.unity
-    guid: ffc3c7a9043e16449ba2966f7553356f
+    path: Assets/_Scenes/Multiplayer/mushroom-simple-audioloop-holons-multiplayer/mushroom-simple-audioloop-holons-multiplayer.unity
+    guid: f5eed1548383cc44da0e1340c0dee48f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8542e2b4bcd29134b9385f90073fb5e6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a597bf5e82fd54398c59757e2c5238, type: 2}

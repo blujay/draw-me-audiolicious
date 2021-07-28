@@ -19,8 +19,6 @@ namespace Networking.Pun2
             if (devices.Length > 0)
             {
                 recorder = GetComponent<Recorder>();
-                voiceConnection.InitRecorder(recorder);
-                recorder.Init(voiceConnection);
                 recorder.UnityMicrophoneDevice = devices[0];
                 
             }
