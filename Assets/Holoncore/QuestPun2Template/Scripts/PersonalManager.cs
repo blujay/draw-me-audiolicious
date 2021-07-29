@@ -22,14 +22,14 @@ namespace Networking.Pun2
         List<GameObject> toolsL;
         int currentToolR;
         int currentToolL;
-        public string lobbySceneName = "Lobby";
+        //public string lobbySceneName = "Lobby";
 
         private void Awake()
         {
             /// If the game starts in Room scene, and is not connected, sends the player back to Lobby scene to connect first.
             if (!PhotonNetwork.NetworkingClient.IsConnected)
             {
-                SceneManager.LoadScene(lobbySceneName);
+                SceneManager.LoadScene(0);
                 return;
             }
             /////////////////////////////////
