@@ -177,7 +177,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                     filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
                     SavWav.Save(filename, audioS.clip);
-                    SavWav.TrimSilence(audioS.clip,0.1f);
+                    //SavWav.TrimSilence(audioS.clip,0.1f);
                     Debug.Log("File Saved Successfully at: " + filepath);
                 }
 
