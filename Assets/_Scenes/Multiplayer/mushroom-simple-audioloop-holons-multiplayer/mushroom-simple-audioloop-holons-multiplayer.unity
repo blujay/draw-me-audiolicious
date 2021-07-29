@@ -555,6 +555,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1484648083}
     m_Modifications:
     - target: {fileID: 2578051641374953641, guid: 840575ee588dc4f40bfade780e957de0, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f30467bc38f35944b10004b7e606f0e, type: 3}
+    - target: {fileID: 2578051641374953641, guid: 840575ee588dc4f40bfade780e957de0, type: 3}
+      propertyPath: sourceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578051641374953641, guid: 840575ee588dc4f40bfade780e957de0, type: 3}
       propertyPath: reliableMode
       value: 0
       objectReference: {fileID: 0}
@@ -564,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2578051641374953641, guid: 840575ee588dc4f40bfade780e957de0, type: 3}
       propertyPath: unityMicrophoneDevice
-      value: Microphone (Realtek High Definition Audio)
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2578051641374953641, guid: 840575ee588dc4f40bfade780e957de0, type: 3}
       propertyPath: photonMicrophoneDeviceId
