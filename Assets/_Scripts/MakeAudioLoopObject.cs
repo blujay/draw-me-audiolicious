@@ -139,12 +139,12 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 Recorder recorder = this.GetComponent<Recorder>();
                 GetComponent<PhotonVoiceView>().UsePrimaryRecorder = true;
                 recorder.SourceType = Recorder.InputSourceType.AudioClip;
-                recorder.AudioClip = Microphone.Start(_SelectedDevice, true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
+                recorder.AudioClip = Microphone.Start(_SelectedDevice, true, 30, 48000); // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[recorder.AudioClip.samples * recorder.AudioClip.channels];
                 recorder.AudioClip.GetData(samplesData, 0);
             }
-                audioS.clip = Microphone.Start(_SelectedDevice, true, loopDuration, 48000);  // third argument restrict the duration of the audio to duration specified
+                audioS.clip = Microphone.Start(_SelectedDevice, true, 30, 48000);  // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[audioS.clip.samples * audioS.clip.channels];
                 audioS.clip.GetData(samplesData, 0);
@@ -177,6 +177,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                     filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
                     SavWav.Save(filename, audioS.clip);
+                    SavWav.TrimSilence(audioS.clip,0.1f);
                     Debug.Log("File Saved Successfully at: " + filepath);
                 }
 
