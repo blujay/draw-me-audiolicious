@@ -39,6 +39,8 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         private string filename;
         private string filepath;
 
+    private float loopLenght = 0;
+
     private void OnEnable()
     {
         generated = false;
@@ -126,6 +128,14 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         } 
     }
 
+    private void Update() {
+        if (recording) {
+            loopLenght += Time.deltaTime;
+        } else {
+            loopLenght = 0;
+        }
+    }
+
     public void StartRecording()
         {
             if (!generated)
@@ -152,6 +162,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             
         }
 
+    [Obsolete]
     public void StopRecording()
     {
         if (recording)
@@ -176,7 +187,9 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 {
                     filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
-                    AudioClip trimmedClip = SavWav.TrimSilence(audioS.clip,0f);
+
+                    AudioClip trimmedClip = ShortenAudioclip(audioS.clip, _SelectedDevice);
+
                     SavWav.Save(filename, trimmedClip);
                     Debug.Log("File Saved Successfully at: " + filepath);
                 }
@@ -196,6 +209,37 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 StartCoroutine(GenerateAudioObject(filepath, filename, audioS.clip)); ;
                 generated = true;
             }
+        }
+
+        AudioClip ShortenAudioclip(AudioClip recordedClip, string deviceName) {
+
+            var position = Microphone.GetPosition(deviceName);
+            var soundData = new float[recordedClip.samples * recordedClip.channels];
+            recordedClip.GetData(soundData, 0);
+
+            //Create shortened array for the data that was used for recording
+            var newData = new float[position * recordedClip.channels];
+
+            //Copy the used samples to a new array
+            for (int i = 0; i < newData.Length; i++) {
+                newData[i] = soundData[i];
+            }
+
+            //One does not simply shorten an AudioClip,
+            //    so we make a new one with the appropriate length
+            var newClip = AudioClip.Create(recordedClip.name,
+                                            position,
+                                            recordedClip.channels,
+                                            recordedClip.frequency,
+                                            false,
+                                            false);
+
+            newClip.SetData(newData, 0);        //Give it the data from the old clip
+
+            //Replace the old clip
+            AudioClip.Destroy(recordedClip);
+            recordedClip = newClip;
+            return recordedClip;
         }
 
     }
