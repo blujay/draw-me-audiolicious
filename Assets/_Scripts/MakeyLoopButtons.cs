@@ -17,6 +17,7 @@ namespace Networking.Pun2
 
         IEnumerator StartRecordingLoop()
         {
+            yield return new WaitForSeconds(0.1f);
             yield return pressedOnce = true;
             GetComponent<MakeAudioLoopObject>().generated = false;
             GetComponent<MakeAudioLoopObject>().StartRecording();
@@ -25,6 +26,7 @@ namespace Networking.Pun2
 
         IEnumerator StopRecordingLoop()
         {
+            yield return new WaitForSeconds(0.1f);
             yield return pressedOnce = false;
             GetComponent<MakeAudioLoopObject>().StopRecording();
             Debug.Log("Pressed once to turn OFF");
@@ -37,19 +39,19 @@ namespace Networking.Pun2
             {
                 if (OVRInput.GetDown(OVRInput.Button.One) && pressedOnce == false)
                 {
-                    StartCoroutine("StartRecordingLoop", 1f);
+                    StartCoroutine(StartRecordingLoop());
                     return;
                 }
 
                 if (OVRInput.GetUp(OVRInput.Button.One) && pressedOnce == true)
                 {
-                    StartCoroutine("StopRecordingLoop", 1f);
+                    StartCoroutine(StopRecordingLoop());
                     return;
                 }
             }
             if(gameObject.GetComponent<PunOVRGrabbable>().isGrabbed == false && pressedOnce == true)
             {
-                StartCoroutine("StopRecordingLoop", 1f);
+                StartCoroutine(StopRecordingLoop());
                 return;
             }
         }

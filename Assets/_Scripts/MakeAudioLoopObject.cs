@@ -25,21 +25,19 @@ using UnityEngine.Android;
 [RequireComponent(typeof(AudioSource))]
 
 public class MakeAudioLoopObject : MonoBehaviourPun
-    {
+{
 
-        public int loopDuration;
-        public Color recordingColor;
-        public Color colorPostLoop;
-        private string _SelectedDevice;
-        private string[] devices;
-        static float[] samplesData;
+    public int loopDuration;
+    public Color recordingColor;
+    public Color colorPostLoop;
+    private string _SelectedDevice;
+    private string[] devices;
+    static float[] samplesData;
 
-        [NonSerialized] public bool recording;
-        [NonSerialized] public bool generated;
-        private string filename;
-        private string filepath;
-
-    private float loopLenght = 0;
+    [NonSerialized] public bool recording;
+    [NonSerialized] public bool generated;
+    private string filename;
+    private string filepath;
 
     private void OnEnable()
     {
@@ -63,7 +61,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             audioS.Play();
         }
         //set the recorder component to play from the new audioclip
-        
+
     }
 
 
@@ -71,24 +69,25 @@ public class MakeAudioLoopObject : MonoBehaviourPun
     {
         AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 
-        if (PhotonNetwork.IsConnected) {
+        if (PhotonNetwork.IsConnected)
+        {
             Recorder recorder = GetComponent<Recorder>();
             Speaker speaker = GetComponent<Speaker>();
         }
-        
+
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            
+
             filepath = Path.Combine("file://" + Application.persistentDataPath, filename + ".wav");
-            Debug.Log (filepath);
+            Debug.Log(filepath);
         }
         else
         {
             filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
-           
+
         }
-       
+
         using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filepath, AudioType.WAV);
         yield return www.SendWebRequest();
 
@@ -99,7 +98,8 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         }
         else //file is found
         {
-            if (PhotonNetwork.IsConnected) {
+            if (PhotonNetwork.IsConnected)
+            {
                 Recorder recorder = GetComponent<Recorder>();
                 Speaker speaker = GetComponent<Speaker>();
                 recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
@@ -113,36 +113,28 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 audioS.clip.name = recorder.AudioClip.name;
                 audioS.Play();
 
-            } 
+            }
 
             else
             {
                 audioS.clip = DownloadHandlerAudioClip.GetContent(www);
                 audioS.clip.name = filename;
                 audioS.Play();
-                
+
             }
             audioS.loop = true;
             generated = true;
-            
-        } 
-    }
 
-    private void Update() {
-        if (recording) {
-            loopLenght += Time.deltaTime;
-        } else {
-            loopLenght = 0;
         }
     }
 
     public void StartRecording()
+    {
+        if (!generated)
         {
-            if (!generated)
-            {
-                AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-                GetComponentInChildren<Renderer>().material.color = recordingColor;
-                recording = true;
+            AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
+            GetComponentInChildren<Renderer>().material.color = recordingColor;
+            recording = true;
 
             if (PhotonNetwork.IsConnected)
             {
@@ -154,15 +146,14 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 samplesData = new float[recorder.AudioClip.samples * recorder.AudioClip.channels];
                 recorder.AudioClip.GetData(samplesData, 0);
             }
-                audioS.clip = Microphone.Start(_SelectedDevice, true, 30, 48000);  // third argument restrict the duration of the audio to duration specified
-                while (!(Microphone.GetPosition(null) > 0)) { }
-                samplesData = new float[audioS.clip.samples * audioS.clip.channels];
-                audioS.clip.GetData(samplesData, 0);
-            }
-            
+            audioS.clip = Microphone.Start(_SelectedDevice, true, 30, 48000);  // third argument restrict the duration of the audio to duration specified
+            while (!(Microphone.GetPosition(null) > 0)) { }
+            samplesData = new float[audioS.clip.samples * audioS.clip.channels];
+            audioS.clip.GetData(samplesData, 0);
         }
 
-    [Obsolete]
+    }
+
     public void StopRecording()
     {
         if (recording)
@@ -170,14 +161,15 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             GetComponentInChildren<Renderer>().material.color = colorPostLoop;
             Debug.Log(filename);
             AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-            
+
 
             // Delete the file if it exists.
             if (File.Exists(filepath))
             {
                 File.Delete(filepath);
             }
-            try { 
+            try
+            {
 
                 Microphone.End(_SelectedDevice);
 
@@ -187,9 +179,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
                 {
                     filename = (gameObject.name + "-" + GetComponent<PhotonView>().ViewID);
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
-
-                    AudioClip trimmedClip = ShortenAudioclip(audioS.clip, _SelectedDevice);
-
+                    AudioClip trimmedClip = SavWav.TrimSilence(audioS.clip, 0f);
                     SavWav.Save(filename, trimmedClip);
                     Debug.Log("File Saved Successfully at: " + filepath);
                 }
@@ -211,38 +201,6 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             }
         }
 
-        AudioClip ShortenAudioclip(AudioClip recordedClip, string deviceName) {
-
-            var position = Microphone.GetPosition(deviceName);
-            var soundData = new float[recordedClip.samples * recordedClip.channels];
-            recordedClip.GetData(soundData, 0);
-
-            //Create shortened array for the data that was used for recording
-            var newData = new float[position * recordedClip.channels];
-
-            //Copy the used samples to a new array
-            for (int i = 0; i < newData.Length; i++) {
-                newData[i] = soundData[i];
-            }
-
-            //One does not simply shorten an AudioClip,
-            //    so we make a new one with the appropriate length
-            var newClip = AudioClip.Create(recordedClip.name,
-                                            position,
-                                            recordedClip.channels,
-                                            recordedClip.frequency,
-                                            false,
-                                            false);
-
-            newClip.SetData(newData, 0);        //Give it the data from the old clip
-
-            //Replace the old clip
-            AudioClip.Destroy(recordedClip);
-            recordedClip = newClip;
-            return recordedClip;
-        }
-
     }
 
 }
-

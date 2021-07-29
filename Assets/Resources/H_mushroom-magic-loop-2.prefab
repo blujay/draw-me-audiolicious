@@ -111,8 +111,8 @@ GameObject:
   - component: {fileID: 5988705645740630288}
   - component: {fileID: 5988705645740630955}
   - component: {fileID: 5988705645740631518}
+  - component: {fileID: 7905871261212475997}
   - component: {fileID: 5988705645740630715}
-  - component: {fileID: 5988705645740630724}
   - component: {fileID: 5988705645740631027}
   - component: {fileID: 9105631728285534729}
   - component: {fileID: 2578051641374953641}
@@ -250,7 +250,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -332,6 +332,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7905871261212475997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5988705645740634006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c0a615918f0d64193d44c6df16e038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopDuration: 30
+  recordingColor: {r: 0.8773585, g: 0.102634355, b: 0.102634355, a: 1}
+  colorPostLoop: {r: 0.05993233, g: 0.11970924, b: 0.8584906, a: 1}
 --- !u!114 &5988705645740630715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,21 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d081f074836674a9585e56e36989aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5988705645740630724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5988705645740634006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c0a615918f0d64193d44c6df16e038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loopDuration: 2
-  recordingColor: {r: 1, g: 0.14509805, b: 0.4784314, a: 0}
-  colorPostLoop: {r: 0.09638655, g: 0.8962264, b: 0.1370366, a: 0}
 --- !u!114 &5988705645740631027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   voiceDetection: 0
   voiceDetectionThreshold: 0.01
   voiceDetectionDelayMs: 500
-  unityMicrophoneDevice: Microphone (Realtek High Definition Audio)
+  unityMicrophoneDevice: 
   photonMicrophoneDeviceId: 0
   interestGroup: 0
   debugEchoMode: 0
