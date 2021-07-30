@@ -1,33 +1,58 @@
+using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class MotherloopManager : MonoBehaviour
 {
+    [ReadOnly] public AudioSource motherAudioSource;
+    [ReadOnly] public AudioClip motherClip;    
+    
     public struct ChildLoop
     {
-        public float Duration;
+        public AudioClip Clip;
         public float Delay;
         public int PlayEvery;
-        public AudioSource audioSource;
+        public AudioSource Source;
     }
 
-    public ChildLoop[] ChildLoops;
-    public int LoopCounter;
+    public List<ChildLoop> ChildLoops;
+    private int LoopCounter;
 
-    private ChildLoop currentChildLoop;
-    private float motherloopDuration = 3;
-
-    void Start()
+    public void AddClip(AudioSource source, AudioClip clip, float delay)
     {
-        InvokeRepeating(nameof(PlayMotherloop), 0, motherloopDuration);
+        if (motherAudioSource == null) // We are adding the mother
+        {
+            motherAudioSource = source;
+            motherClip = clip;
+            InvokeRepeating(nameof(PlayChildLoops), 0, motherClip.length);
+            motherAudioSource.clip = motherClip;
+            motherAudioSource.loop = true;
+            motherAudioSource.Play();
+        }
+        else  // We are adding a new child
+        {
+            int playEvery;
+            float clipTotalLength = delay + clip.length;
+            playEvery = Mathf.FloorToInt(motherClip.length / clipTotalLength) + 1;
+            
+            var newChild = new ChildLoop()
+            {
+                Clip = clip,
+                Delay = delay,
+                PlayEvery = playEvery,
+                Source = source,
+            };
+            ChildLoops.Add(newChild);
+        }
     }
     
-    private void PlayMotherloop()
+    private void PlayChildLoops()
     {
         foreach (var loop in ChildLoops)
         {
             if (LoopCounter % loop.PlayEvery == 0)
             {
-                loop.audioSource.PlayDelayed(loop.Delay);
+                loop.Source.PlayDelayed(loop.Delay);
             }
         }
         LoopCounter++;
