@@ -2,7 +2,24 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
-public class MotherloopManager : MonoBehaviour
+/*Motherloop manager keeps track of all the loops that are recorded in the scene 
+ * Requires MakeAudioLoop.cs to be put on each object that will be recording a loop
+     *  First recording in a scene is the 'mother loop' this recording is used to syncronise any future loop with
+     *  Mother loop playback starts immediately after recording stopped/saved
+     *  Child loop = any subsequent loop is a child loop and the delay from start of motherloop is added to it's length
+     *  Child loop will start to play at the next available mother loop given how long it is. If it's longer than mother, it will skip some.
+     * 
+     *     Mother loop
+     *     |-----------------------|-----------------------|-----------------------|-----------------------|
+     *     
+     *     Child loops (longer than & shorter than)
+     *     |-------------------------------|               |-------------------------------|
+     *          |---|                   |---|                   |---|                   |---|
+     *        |---------------|       |---------------|       |---------------|       |---------------|
+     * 
+ */
+
+public class MotherLoopManager : MonoBehaviour
 {
     [ReadOnly] public AudioSource motherAudioSource;
     [ReadOnly] public AudioClip motherClip;    

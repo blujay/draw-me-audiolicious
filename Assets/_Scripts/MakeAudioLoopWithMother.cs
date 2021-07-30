@@ -22,7 +22,7 @@ using UnityEngine.Android;
 
 //Todo - find the right way to get the pun recorder to transmit all audiosources in scene when input is an audioclip from the player who generated it... do these become 'players'?
 
-/*Todo - Create motherloop
+/* Create motherloop
      *  First recording in a scene is the 'mother loop' this recording is used to syncronise any future loop with
      *  Mother loop playback starts immediately after recording stopped/saved
      *  Child loop = any subsequent loop
@@ -40,7 +40,7 @@ using UnityEngine.Android;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class MakeAudioLoopObject : MonoBehaviourPun
+public class MakeAudioLoopWithMother : MonoBehaviourPun
 {
 
     public int loopDuration;
@@ -48,6 +48,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
     public Color colorPostLoop;
     private string _SelectedDevice;
     private string[] devices;
+    private MotherLoopManager motherLooper;
     static float[] samplesData;
 
     [NonSerialized] public bool recording;
@@ -64,6 +65,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
     void Start()
     {
         AudioSource audioS = GetComponent<AudioSource>();
+        motherLooper = FindObjectOfType<MotherLoopManager>();
         recording = false;
         generated = false;
         devices = Microphone.devices;
@@ -224,6 +226,12 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             }
         }
 
+    }
+
+    public void talkToMotherLooper(AudioSource audioS, AudioClip clip)
+    {
+        audioS = GetComponent<AudioSource>();
+        clip = clip;
     }
 
     public void StartPlayback(UnityWebRequest www)
