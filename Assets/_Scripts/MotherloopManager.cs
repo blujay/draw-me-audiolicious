@@ -35,7 +35,7 @@ public class MotherloopManager : MonoBehaviour
             float clipTotalLength = delay + clip.length;
             playEvery = Mathf.FloorToInt(motherClip.length / clipTotalLength) + 1;
             
-            var newChild = new ChildLoop()
+            var newChild = new ChildLoop
             {
                 Clip = clip,
                 Delay = delay,
@@ -52,6 +52,7 @@ public class MotherloopManager : MonoBehaviour
         {
             if (LoopCounter % loop.PlayEvery == 0)
             {
+                loop.Source.clip = loop.Clip;
                 loop.Source.PlayDelayed(loop.Delay);
             }
         }
