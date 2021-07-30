@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MotherloopManager : MonoBehaviour
 {
-
     public struct ChildLoop
     {
         public float Duration;
@@ -21,11 +20,9 @@ public class MotherloopManager : MonoBehaviour
     {
         InvokeRepeating(nameof(PlayMotherloop), 0, motherloopDuration);
     }
-
-
+    
     private void PlayMotherloop()
     {
-        
         foreach (var loop in ChildLoops)
         {
             if (LoopCounter % loop.PlayEvery == 0)
@@ -33,8 +30,6 @@ public class MotherloopManager : MonoBehaviour
                 loop.audioSource.PlayDelayed(loop.Delay);
             }
         }
-
         LoopCounter++;
-
     }
 }
