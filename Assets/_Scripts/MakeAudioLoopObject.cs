@@ -22,6 +22,22 @@ using UnityEngine.Android;
 
 //Todo - find the right way to get the pun recorder to transmit all audiosources in scene when input is an audioclip from the player who generated it... do these become 'players'?
 
+/*Todo - Create motherloop
+     *  First recording in a scene is the 'mother loop' this recording is used to syncronise any future loop with
+     *  Mother loop playback starts immediately after recording stopped/saved
+     *  Child loop = any subsequent loop
+     * 
+     *     Mother loop
+     *     |-----------------------|-----------------------|-----------------------|-----------------------|
+     *     
+     *     Child loops (longer than & shorter than)
+     *     |-------------------------------|               |-------------------------------|
+     *          |---|                   |---|                   |---|                   |---|
+     *        |---------------|       |---------------|       |---------------|       |---------------|
+     * 
+ */
+
+
 [RequireComponent(typeof(AudioSource))]
 
 public class MakeAudioLoopObject : MonoBehaviourPun
@@ -55,14 +71,21 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         if (PhotonNetwork.IsConnected)
         {
             Recorder recorder = GetComponent<Recorder>();
-            recorder.Init(FindObjectOfType<VoiceConnection>());
+            //recorder.Init(FindObjectOfType<VoiceConnection>());
             recorder.SourceType = Recorder.InputSourceType.AudioClip;
+            if (recorder.IsRecording)
+            {
+                StopRecording();
+            }
+            
             audioS.clip = recorder.AudioClip;
-            recorder.IsRecording = false;
             Speaker speaker = GetComponent<Speaker>();
-            speaker.RestartPlayback();
-            audioS.Play();
+            if (speaker.IsPlaying)
+            {
+                speaker.RestartPlayback();
+            }
         }
+        audioS.Play();
         //set the recorder component to play from the new audioclip
 
     }
@@ -207,7 +230,12 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             Speaker speaker = GetComponent<Speaker>();
             recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
             recorder.AudioClip.name = filename;
-            recorder.RestartRecording();
+            if(recorder.IsRecording == false)
+            {
+                recorder.RestartRecording();
+                recorder.IsRecording = true;
+            }
+            
             if (GetComponent<PhotonVoiceView>().IsSpeakerLinked)
             {
                 speaker.RestartPlayback();
