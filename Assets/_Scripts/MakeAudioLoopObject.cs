@@ -51,13 +51,16 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         recording = false;
         generated = false;
         devices = Microphone.devices;
+
         if (PhotonNetwork.IsConnected)
         {
             Recorder recorder = GetComponent<Recorder>();
             recorder.Init(FindObjectOfType<VoiceConnection>());
-            Speaker speaker = GetComponent<Speaker>();
             recorder.SourceType = Recorder.InputSourceType.AudioClip;
             audioS.clip = recorder.AudioClip;
+            recorder.IsRecording = false;
+            Speaker speaker = GetComponent<Speaker>();
+            speaker.RestartPlayback();
             audioS.Play();
         }
         //set the recorder component to play from the new audioclip
@@ -98,33 +101,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
         }
         else //file is found
         {
-            if (PhotonNetwork.IsConnected)
-            {
-                Recorder recorder = GetComponent<Recorder>();
-                Speaker speaker = GetComponent<Speaker>();
-                recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
-                recorder.AudioClip.name = filename;
-                recorder.RestartRecording();
-                if (GetComponent<PhotonVoiceView>().IsSpeakerLinked)
-                {
-                    speaker.RestartPlayback();
-                }
-                audioS.clip = recorder.AudioClip;
-                audioS.clip.name = recorder.AudioClip.name;
-                audioS.Play();
-
-            }
-
-            else
-            {
-                audioS.clip = DownloadHandlerAudioClip.GetContent(www);
-                audioS.clip.name = filename;
-                audioS.Play();
-
-            }
-            audioS.loop = true;
-            generated = true;
-
+            StartPlayback(www);
         }
     }
 
@@ -140,13 +117,15 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             {
                 Recorder recorder = this.GetComponent<Recorder>();
                 GetComponent<PhotonVoiceView>().UsePrimaryRecorder = true;
+                recorder.StartRecording();
+                //set the recorder component to record from the microphone
                 recorder.SourceType = Recorder.InputSourceType.AudioClip;
-                recorder.AudioClip = Microphone.Start(_SelectedDevice, false, 30, 48000); // third argument restrict the duration of the audio to duration specified
+                recorder.AudioClip = Microphone.Start(_SelectedDevice, false, 30, 44100); // third argument restrict the duration of the audio to duration specified
                 while (!(Microphone.GetPosition(null) > 0)) { }
                 samplesData = new float[recorder.AudioClip.samples * recorder.AudioClip.channels];
                 recorder.AudioClip.GetData(samplesData, 0);
             }
-            audioS.clip = Microphone.Start(_SelectedDevice, true, 30, 48000);  // third argument restrict the duration of the audio to duration specified
+            audioS.clip = Microphone.Start(_SelectedDevice, false, 30, 44100);  // third argument restrict the duration of the audio to duration specified
             while (!(Microphone.GetPosition(null) > 0)) { }
             samplesData = new float[audioS.clip.samples * audioS.clip.channels];
             audioS.clip.GetData(samplesData, 0);
@@ -161,6 +140,7 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             GetComponentInChildren<Renderer>().material.color = colorPostLoop;
             Debug.Log(filename);
             AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
+            Recorder recorder = this.GetComponent<Recorder>();
 
 
             // Delete the file if it exists.
@@ -170,10 +150,24 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             }
             try
             {
+                if (PhotonNetwork.IsConnected)
+                {
+                    
+                    if (recorder.IsRecording)
+                    {
+                        recording = false;
+                        recorder.StopRecording();
+                        GetComponent<PhotonVoiceView>().UsePrimaryRecorder = false;
+                    }
+                    
+                } else
+                {
+                    recording = false;
+                    Microphone.End(_SelectedDevice);
+                }
+                    
 
-                Microphone.End(_SelectedDevice);
-
-                recording = false;
+                
 
                 if (!recording && !generated)
                 {
@@ -201,6 +195,37 @@ public class MakeAudioLoopObject : MonoBehaviourPun
             }
         }
 
+    }
+
+    public void StartPlayback(UnityWebRequest www)
+    {
+        AudioSource audioS = GetComponent<AudioSource>();
+
+        if (PhotonNetwork.IsConnected)
+        {
+            Recorder recorder = GetComponent<Recorder>();
+            Speaker speaker = GetComponent<Speaker>();
+            recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
+            recorder.AudioClip.name = filename;
+            recorder.RestartRecording();
+            if (GetComponent<PhotonVoiceView>().IsSpeakerLinked)
+            {
+                speaker.RestartPlayback();
+            }
+            audioS.clip = recorder.AudioClip;
+            audioS.clip.name = recorder.AudioClip.name;
+        }
+
+        else
+        {
+            audioS.clip = DownloadHandlerAudioClip.GetContent(www);
+            audioS.clip.name = filename;
+        }
+
+        audioS.loop = true;
+        generated = true;
+        audioS.Stop();
+        audioS.Play();
     }
 
 }
