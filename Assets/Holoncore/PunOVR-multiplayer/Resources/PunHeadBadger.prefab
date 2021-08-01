@@ -2300,7 +2300,7 @@ MonoBehaviour:
   photonMicrophoneDeviceId: -1
   interestGroup: 0
   debugEchoMode: 0
-  reliableMode: 0
+  reliableMode: 1
   encrypt: 1
   transmitEnabled: 1
   samplingRate: 48000

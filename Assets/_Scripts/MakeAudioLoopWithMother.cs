@@ -68,6 +68,7 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         motherLooper = FindObjectOfType<MotherLoopManager>();
         recording = false;
         generated = false;
@@ -76,11 +77,6 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
         //set the recorder component to play from the new audioclip
 
     }
-
-
-
-
-
 
     void Update()
     {
@@ -98,38 +94,14 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
             }
         }
 
-        //if (gameObject.GetComponent<PunOVRGrabbable>().isGrabbed == false)
-        //{
-        //    Debug.Log("Dropped");
-        //    //GetComponent<MakeAudioLoopWithMother>().StopRecording();
-        //}
-
+        if (gameObject.GetComponent<PunOVRGrabbable>().isGrabbed == false)
+        {
+            StopRecording();
+        }
     }
-
-
-
-
-
-
-
-    //private void Update()
-    //{
-    //    if (recording)
-    //    {
-    //        loopLength += Time.deltaTime;
-    //    }
-    //    else
-    //    {
-    //        loopLength = 0;
-    //    }
-    //}
-
     
     IEnumerator GenerateAudioObject(string filename)
     {
-
-        AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-
         if (Application.platform == RuntimePlatform.Android)
         {
 
@@ -163,11 +135,10 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
     {
         if (!generated)
         {
-            AudioSource audioS = gameObject.GetComponent<AudioSource>();
             GetComponentInChildren<Renderer>().material.color = recordingColor;
 
             _SelectedDevice = devices[0];
-            audioS.clip = Microphone.Start(_SelectedDevice, false, 30, 48000);  // third argument restrict the duration of the audio to duration specified
+            audioS.clip = Microphone.Start(_SelectedDevice, false, 30, 22050);  // third argument restrict the duration of the audio to duration specified
             recording = true;
             //what position is the motherloop at right now?
             if (motherLooper.MotherExists && motherLooper.motherAudioSource.isPlaying)
@@ -187,7 +158,6 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
             recording = false;
             GetComponentInChildren<Renderer>().material.color = colorPostLoop;
             Debug.Log(filename);
-            AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 
             // Delete the file if it exists.
             if (File.Exists(filepath))
