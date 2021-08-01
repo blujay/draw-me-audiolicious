@@ -10,6 +10,7 @@ using Photon.Voice.Unity;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.Networking;
 using Photon.Voice.PUN;
+using Networking.Pun2;
 #if PLATFORM_ANDROID
 using UnityEngine.Android;
 #endif
@@ -43,13 +44,15 @@ using UnityEngine.Android;
 public class MakeAudioLoopWithMother : MonoBehaviourPun
 {
 
-    public int loopDuration;
     public Color recordingColor;
     public Color colorPostLoop;
     private string _SelectedDevice;
     private string[] devices;
+    private AudioSource audioS;
     private MotherLoopManager motherLooper;
+    private float motherLoopPos;
     static float[] samplesData;
+    private float loopLength;
 
     [NonSerialized] public bool recording;
     [NonSerialized] public bool generated;
@@ -59,51 +62,73 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
     private void OnEnable()
     {
         generated = false;
+        loopLength = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource audioS = GetComponent<AudioSource>();
         motherLooper = FindObjectOfType<MotherLoopManager>();
         recording = false;
         generated = false;
         devices = Microphone.devices;
 
-
-        if (PhotonNetwork.IsConnected)
-        {
-            Recorder recorder = GetComponent<Recorder>();
-            //recorder.Init(FindObjectOfType<VoiceConnection>());
-            recorder.SourceType = Recorder.InputSourceType.AudioClip;
-            if (recorder.IsRecording)
-            {
-                StopRecording();
-            }
-            
-            audioS.clip = recorder.AudioClip;
-            Speaker speaker = GetComponent<Speaker>();
-            if (speaker.IsPlaying)
-            {
-                speaker.RestartPlayback();
-            }
-        }
-        audioS.Play();
         //set the recorder component to play from the new audioclip
 
     }
 
 
-    IEnumerator GenerateAudioObject(string filepath, string filename, AudioClip GenClip)
-    {
-        AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 
-        if (PhotonNetwork.IsConnected)
+
+
+
+    void Update()
+    {
+        if (gameObject.GetComponent<PunOVRGrabbable>().isGrabbed)
         {
-            Recorder recorder = GetComponent<Recorder>();
-            Speaker speaker = GetComponent<Speaker>();
+            if (OVRInput.GetDown(OVRInput.Button.One))
+            {
+                generated = false;
+                StartRecording();
+            }
+
+            if (OVRInput.GetUp(OVRInput.Button.One))
+            {
+                StopRecording();
+            }
         }
 
+        //if (gameObject.GetComponent<PunOVRGrabbable>().isGrabbed == false)
+        //{
+        //    Debug.Log("Dropped");
+        //    //GetComponent<MakeAudioLoopWithMother>().StopRecording();
+        //}
+
+    }
+
+
+
+
+
+
+
+    //private void Update()
+    //{
+    //    if (recording)
+    //    {
+    //        loopLength += Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        loopLength = 0;
+    //    }
+    //}
+
+    
+    IEnumerator GenerateAudioObject(string filename)
+    {
+
+        AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
 
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -120,6 +145,7 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
         using UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filepath, AudioType.WAV);
         yield return www.SendWebRequest();
 
+
         if (www.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(www.error); //file not found
@@ -127,7 +153,9 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
         }
         else //file is found
         {
-            StartPlayback(www);
+            audioS.clip = audioS.clip = DownloadHandlerAudioClip.GetContent(www);
+            audioS.clip.name = filename;
+            motherLooper.AddClip(audioS, audioS.clip, motherLoopPos, true);
         }
     }
 
@@ -135,44 +163,31 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
     {
         if (!generated)
         {
-            AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
+            AudioSource audioS = gameObject.GetComponent<AudioSource>();
             GetComponentInChildren<Renderer>().material.color = recordingColor;
+
+            _SelectedDevice = devices[0];
+            audioS.clip = Microphone.Start(_SelectedDevice, false, 30, 48000);  // third argument restrict the duration of the audio to duration specified
             recording = true;
-
-            if (PhotonNetwork.IsConnected)
+            //what position is the motherloop at right now?
+            if (motherLooper.MotherExists && motherLooper.motherAudioSource.isPlaying)
             {
-                Recorder recorder = this.GetComponent<Recorder>();
-                GetComponent<PhotonVoiceView>().UsePrimaryRecorder = true;
-                recorder.StartRecording();
-                //set the recorder component to record from the microphone
-                recorder.SourceType = Recorder.InputSourceType.AudioClip;
-                _SelectedDevice = recorder.UnityMicrophoneDevice = devices[0];
-                recorder.AudioClip = Microphone.Start(_SelectedDevice, false, 30, 44100); // third argument restrict the duration of the audio to duration specified
-                while (!(Microphone.GetPosition(null) > 0)) { }
-                samplesData = new float[recorder.AudioClip.samples * recorder.AudioClip.channels];
-                recorder.AudioClip.GetData(samplesData, 0);
-            } else
-            {
-                _SelectedDevice = devices[0];
-                audioS.clip = Microphone.Start(_SelectedDevice, false, 30, 44100);  // third argument restrict the duration of the audio to duration specified
-                while (!(Microphone.GetPosition(null) > 0)) { }
-                samplesData = new float[audioS.clip.samples * audioS.clip.channels];
-                audioS.clip.GetData(samplesData, 0);
+                motherLoopPos = (float) motherLooper.motherAudioSource.timeSamples / motherLooper.motherClip.frequency; //in this example right now it would be at 3s
             }
-            
+            while (!(Microphone.GetPosition(null) > 0)) { }
+            samplesData = new float[audioS.clip.samples * audioS.clip.channels];
+            audioS.clip.GetData(samplesData, 0);
         }
-
     }
 
     public void StopRecording()
     {
         if (recording)
         {
+            recording = false;
             GetComponentInChildren<Renderer>().material.color = colorPostLoop;
             Debug.Log(filename);
             AudioSource audioS = this.gameObject.GetComponent<AudioSource>();
-            Recorder recorder = this.GetComponent<Recorder>();
-
 
             // Delete the file if it exists.
             if (File.Exists(filepath))
@@ -181,24 +196,7 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
             }
             try
             {
-                if (PhotonNetwork.IsConnected)
-                {
-                    
-                    if (recorder.IsRecording)
-                    {
-                        recording = false;
-                        recorder.StopRecording();
-                        GetComponent<PhotonVoiceView>().UsePrimaryRecorder = false;
-                    }
-                    
-                } else
-                {
-                    recording = false;
-                    Microphone.End(_SelectedDevice);
-                }
-                    
-
-                
+                Microphone.End(_SelectedDevice);
 
                 if (!recording && !generated)
                 {
@@ -206,9 +204,12 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
                     filepath = Path.Combine(Application.persistentDataPath, filename + ".wav");
                     AudioClip trimmedClip = SavWav.TrimSilence(audioS.clip, 0f);
                     SavWav.Save(filename, trimmedClip);
+                    audioS.clip = trimmedClip;
+                    audioS.clip.name = filename;
+                    Debug.Log("loop duration events should be - " + loopLength); // seems to be the difference between recorded and trimmed. maybe delay in running co-routines?
+                    Debug.Log("loop duration trimmed clip is - " + audioS.clip.length);
                     Debug.Log("File Saved Successfully at: " + filepath);
                 }
-
             }
             catch (DirectoryNotFoundException)
             {
@@ -221,53 +222,9 @@ public class MakeAudioLoopWithMother : MonoBehaviourPun
 
             if (!generated && !recording)
             {
-                StartCoroutine(GenerateAudioObject(filepath, filename, audioS.clip)); ;
+                StartCoroutine(GenerateAudioObject(filename));
                 generated = true;
             }
         }
-
     }
-
-    public void talkToMotherLooper(AudioSource audioS, AudioClip clip)
-    {
-        audioS = GetComponent<AudioSource>();
-        clip = clip;
-    }
-
-    public void StartPlayback(UnityWebRequest www)
-    {
-        AudioSource audioS = GetComponent<AudioSource>();
-
-        if (PhotonNetwork.IsConnected)
-        {
-            Recorder recorder = GetComponent<Recorder>();
-            Speaker speaker = GetComponent<Speaker>();
-            recorder.AudioClip = DownloadHandlerAudioClip.GetContent(www);
-            recorder.AudioClip.name = filename;
-            if(recorder.IsRecording == false)
-            {
-                recorder.RestartRecording();
-                recorder.IsRecording = true;
-            }
-            
-            if (GetComponent<PhotonVoiceView>().IsSpeakerLinked)
-            {
-                speaker.RestartPlayback();
-            }
-            audioS.clip = recorder.AudioClip;
-            audioS.clip.name = recorder.AudioClip.name;
-        }
-
-        else
-        {
-            audioS.clip = DownloadHandlerAudioClip.GetContent(www);
-            audioS.clip.name = filename;
-        }
-
-        audioS.loop = true;
-        generated = true;
-        audioS.Stop();
-        audioS.Play();
-    }
-
 }

@@ -16,7 +16,7 @@ namespace Networking.Pun2
 
 {
     [RequireComponent(typeof(AudioSource))]
-    [RequireComponent(typeof(MakeAudioLoopObject))]
+    [RequireComponent(typeof(MakeAudioLoopWithMother))]
 
     public class MakeyLoopMouth : MonoBehaviourPun
     {
@@ -24,10 +24,10 @@ namespace Networking.Pun2
         
         private void OnTriggerEnter(Collider other)
         {
-            if(GetComponent<MakeAudioLoopObject>() != null && other.gameObject.tag == "mouth" && gameObject.GetComponent<PunOVRGrabbable>().isGrabbed)
+            if(GetComponent<MakeAudioLoopWithMother>() != null && other.gameObject.tag == "mouth" && gameObject.GetComponent<PunOVRGrabbable>().isGrabbed)
             {
-                GetComponent<MakeAudioLoopObject>().generated = false;
-                GetComponent<MakeAudioLoopObject>().StartRecording();
+                GetComponent<MakeAudioLoopWithMother>().generated = false;
+                GetComponent<MakeAudioLoopWithMother>().StartRecording();
             }
         }
 
@@ -35,7 +35,7 @@ namespace Networking.Pun2
         {   
             if(other.gameObject.tag == "mouth")
             {
-                GetComponent<MakeAudioLoopObject>().StopRecording();
+                GetComponent<MakeAudioLoopWithMother>().StopRecording();
             }
         }
 

@@ -19,8 +19,8 @@ namespace Networking.Pun2
         {
             yield return new WaitForSeconds(0.1f);
             yield return pressedOnce = true;
-            GetComponent<MakeAudioLoopObject>().generated = false;
-            GetComponent<MakeAudioLoopObject>().StartRecording();
+            GetComponent<MakeAudioLoopWithMother>().generated = false;
+            GetComponent<MakeAudioLoopWithMother>().StartRecording();
             Debug.Log("Pressed once to turn ON");
         }
 
@@ -28,14 +28,14 @@ namespace Networking.Pun2
         {
             yield return new WaitForSeconds(0.1f);
             yield return pressedOnce = false;
-            GetComponent<MakeAudioLoopObject>().StopRecording();
+            GetComponent<MakeAudioLoopWithMother>().StopRecording();
             Debug.Log("Pressed once to turn OFF");
 
         }
 
         void Update()
         {
-            if (GetComponent<MakeAudioLoopObject>() != null && gameObject.GetComponent<PunOVRGrabbable>().isGrabbed)
+            if (GetComponent<MakeAudioLoopWithMother>() != null && gameObject.GetComponent<PunOVRGrabbable>().isGrabbed)
             {
                 if (OVRInput.GetDown(OVRInput.Button.One) && pressedOnce == false)
                 {

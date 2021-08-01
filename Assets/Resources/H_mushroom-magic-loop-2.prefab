@@ -111,12 +111,12 @@ GameObject:
   - component: {fileID: 5988705645740630288}
   - component: {fileID: 5988705645740630955}
   - component: {fileID: 5988705645740631518}
-  - component: {fileID: 7905871261212475997}
   - component: {fileID: 5988705645740630715}
   - component: {fileID: 5988705645740631027}
   - component: {fileID: 9105631728285534729}
   - component: {fileID: 2578051641374953641}
   - component: {fileID: 8563072352236060779}
+  - component: {fileID: 1955780033}
   m_Layer: 7
   m_Name: H_mushroom-magic-loop-2
   m_TagString: Untagged
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 5988705645740634006}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0.083, y: 0.212, z: -0.004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.9421, y: 1.9421, z: 1.9421}
   m_Children:
   - {fileID: 5988705645740632910}
   m_Father: {fileID: 0}
@@ -332,21 +332,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7905871261212475997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5988705645740634006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c0a615918f0d64193d44c6df16e038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loopDuration: 30
-  recordingColor: {r: 0.8773585, g: 0.102634355, b: 0.102634355, a: 1}
-  colorPostLoop: {r: 0.05993233, g: 0.11970924, b: 0.8584906, a: 1}
 --- !u!114 &5988705645740630715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5988705645740634006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efc6d4ee214994c4e9bfefc28492a511, type: 3}
   m_Name: 
@@ -389,7 +374,7 @@ MonoBehaviour:
   speakerInUse: {fileID: 8563072352236060779}
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 0
-  SetupDebugSpeaker: 0
+  SetupDebugSpeaker: 1
 --- !u!114 &2578051641374953641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,9 +402,9 @@ MonoBehaviour:
   samplingRate: 48000
   frameDuration: 20000
   bitrate: 30000
-  sourceType: 0
+  sourceType: 1
   microphoneType: 0
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 5f30467bc38f35944b10004b7e606f0e, type: 3}
   loopAudioClip: 1
   reactOnSystemChanges: 0
   autoStart: 1
@@ -460,3 +445,17 @@ MonoBehaviour:
     MinDelaySoft: 200
     MaxDelaySoft: 400
     MaxDelayHard: 1000
+--- !u!114 &1955780033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5988705645740634006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d745000f83a1dba4aac92d25b6e1fe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recordingColor: {r: 0.93333334, g: 0.15294114, b: 0.7779855, a: 0.92156863}
+  colorPostLoop: {r: 0.9418228, g: 0.9622642, b: 0.48476326, a: 1}
